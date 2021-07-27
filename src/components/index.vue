@@ -25,7 +25,8 @@
     name: 'index',
     data() {
       return {
-        url:'http://xinxi.hd512.com/xinxiPHP/',
+        url:'http://localhost/xinxiPHP/',
+        // url:'http://xinxi.hd512.com/xinxiPHP/',
         name: '', //登录账号
         pass: '' //登录密码
       }
@@ -53,7 +54,7 @@
         }).then(res => {
           console.log(res)
           if (res.data == 'ok') {
-            this.$router.push('/home');
+           this.$router.push({name:'home',params:{code:this.name}});
           } else {
             alert('请输入正确的账号和密码')
           }
