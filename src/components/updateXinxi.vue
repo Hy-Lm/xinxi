@@ -3,7 +3,7 @@
     <div class="operationBoxItem">
       <div class="titleBox">
         学员信息
-        <el-button type="primary" @click='logign' style="margin-left: 20px;">返回登录页</el-button>
+        <el-button type="primary" @click='goback' style="margin-left: 20px;">返回</el-button>
       </div>
       <div class="BoxItem">
         <div class="BoxItemList">
@@ -79,21 +79,21 @@
           <el-input :disabled="dis" type="textarea" v-model="row.remark" style="width: 90%;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
-        <!-- <div class="BoxItemList"> -->
-        <!-- <label style="">库存详情</label> -->
-        <!-- <el-button type="primary" @click="updateXinx" plain>修改信息</el-button>
-          <el-button v-if="!dis" @click='accomplish' type="success" plain>完成</el-button -->
-        <!-- </div> -->
+        <div class="BoxItemList">
+          <!-- <label style="">库存详情</label> -->
+          <el-button type="primary" @click="updateXinx" plain>修改信息</el-button>
+          <el-button v-if="!dis" @click='accomplish' type="success" plain>完成</el-button>
+        </div>
       </div>
     </div>
     <div class="operationBoxItem" style="padding: 0 20px; ">
       <div class="boxImg boxImgA">
-        <el-upload :disabled="dis" class="avatar-uploader showUploader" list-type="picture-card" ref="businessLicense"
-          action :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove"
-          :before-remove="beforeRemove" :on-change="uploadSectionFile" :limit="1">
-          <img v-if="photo" :src="row.img" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+       <el-upload :disabled="dis" class="avatar-uploader showUploader" list-type="picture-card" ref="businessLicense" action
+         :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove"
+         :on-change="uploadSectionFile" :limit="1">
+         <img v-if="photo" :src="row.img" class="avatar">
+         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+       </el-upload>
       </div>
     </div>
 
@@ -108,8 +108,8 @@
         url: 'http://localhost/xinxiPHP/',
         // url:'http://xinxi.hd512.com/xinxiPHP/',
         // boxShow:false,
-        dis: true,
-        photo: true,
+        dis:true,
+        photo:true,
         row: {
           name: '',
           sex: '',
@@ -134,13 +134,11 @@
     },
     mounted() {
       this.info()
-      
     },
     methods: {
-      logign() {
-        this.$router.push({
-          name: 'index'
-        });
+      goback(){
+      //返回首页
+        this.$router.push({name:'all'});
       },
       changeKey(file, fileList) {
         console.log(file, fileList)
@@ -182,17 +180,41 @@
         this.files = file;
         console.log(this.files.url)
       },
-      handleRemove(file) {
+ handleRemove(file) {
         console.log(file);
       },
+      accomplish(){
+        // 修改信息
+          // console.log( this.$route.params.row.id)
+          this.$axios.get(this.url+'updateXx.php', {params:{row:JSON.stringify(this.row)}}).then(res => {
+              console.log(res)
+              if(res.data=='ok'){
+                alert('修改成功')
+                this.info()
+                this.dis=true
+                this.photo=true
+              }else{
+                alert('请输入正确的信息')
+
+              }
+          })
+      },
+      updateXinx(){
+        this.dis=false
+      },
       info() {
-        this.$axios.get(this.url + 'codes.php', {
+        this.$axios.get(this.url + 'xinxiid.php', {
           params: {
-            codes: this.$route.params.code
+            id: this.$route.params.row.id
           }
         }).then(res => {
-          // console.log(res.data)
+          console.log(res.data)
           this.row = res.data[0]
+          for (var k in this.row) {
+            if (this.row[k] == '') {
+              this.row[k] = '无数据'
+            }
+          }
         })
       }
     }
@@ -200,6 +222,7 @@
 </script>
 
 <style>
+
   .boxImg::-webkit-scrollbar {
     width: 2px;
     background: #eee;
@@ -313,10 +336,9 @@
     /* align-items: center; */
     flex-direction: column;
   }
-
   textarea:disabled,
-  input:disabled {
-    background-color: #FFFFFF !important;
-    color: #333333 !important;
+  input:disabled{
+  background-color: #FFFFFF !important;
+  color:#333333 !important;
   }
 </style>

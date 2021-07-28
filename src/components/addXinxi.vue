@@ -2,98 +2,98 @@
   <div class="operationBox">
     <div class="operationBoxItem">
       <div class="titleBox">
-        学员信息
-        <el-button type="primary" @click='logign' style="margin-left: 20px;">返回登录页</el-button>
+        学员信息录入
+        <!-- <el-button type="primary" style="margin-left: 20px;" v-if="boxShow">提交</el-button> -->
       </div>
       <div class="BoxItem">
         <div class="BoxItemList">
           <label>姓名:</label>
-          <el-input :disabled="dis" v-model="row.name" style="width: 240px;"></el-input>
+          <el-input v-model="row.name" style="width: 240px;"></el-input>
           <label>性别:</label>
           <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.sex" style="width: 60px;"></el-input>
+          <el-input v-model="row.sex" style="width: 60px;"></el-input>
           <label>年龄:</label>
           <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.age" style="width: 60px;"></el-input>
+          <el-input v-model="row.age" style="width: 60px;"></el-input>
         </div>
         <div class="BoxItemList">
           <label>联系电话:</label>
           <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.tel" style="width: 240px;"></el-input>
+          <el-input v-model="row.tel" style="width: 240px;"></el-input>
           <label>身份证:</label>
           <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
-          <el-input :disabled="dis" v-model="row.codes" style="width: 240px;"></el-input>
+          <el-input v-model="row.codes" style="width: 240px;"></el-input>
         </div>
         <div class="BoxItemList">
           <label>家庭住址:</label>
-          <el-input :disabled="dis" v-model="row.HomeAddress" style="width: 90%;"></el-input>
+          <el-input v-model="row.HomeAddress" style="width: 90%;"></el-input>
           <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.price}}</div> -->
         </div>
         <div class="BoxItemList">
           <label style="">现居地:</label>
-          <el-input :disabled="dis" v-model="row.newAddress" style="width: 90%;"></el-input>
+          <el-input v-model="row.newAddress" style="width: 90%;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="lianxi">联系人信息</div>
         <div class="BoxItemList">
           <label style="">父亲姓名:</label>
-          <el-input :disabled="dis" v-model="row.fatherName" style="width: 240px;"></el-input>
+          <el-input v-model="row.fatherName" style="width: 240px;"></el-input>
           <label style="">联系电话:</label>
-          <el-input :disabled="dis" v-model="row.fatherTel" style="width: 240px;"></el-input>
+          <el-input v-model="row.fatherTel" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
           <label style="">母亲姓名:</label>
-          <el-input :disabled="dis" v-model="row.motherName" style="width: 240px;"></el-input>
+          <el-input v-model="row.motherName" style="width: 240px;"></el-input>
           <label style="">联系电话:</label>
-          <el-input :disabled="dis" v-model="row.motherTel" style="width: 240px;"></el-input>
+          <el-input v-model="row.motherTel" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
           <label style="">学制:</label>
-          <el-input :disabled="dis" v-model="row.schooling" style="width: 240px;"></el-input>
+          <el-input v-model="row.schooling" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
           <label style="">入学时间:</label>
-          <el-input :disabled="dis" v-model="row.enrollment" style="width: 240px;"></el-input>
+          <el-input v-model="row.enrollment" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
           <label style="">所学专业:</label>
-          <el-input :disabled="dis" v-model="row.major" style="width: 240px;"></el-input>
+          <el-input v-model="row.major" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
           <label style="">专业老师:</label>
-          <el-input :disabled="dis" v-model="row.majorTeacher" style="width: 240px;"></el-input>
+          <el-input v-model="row.majorTeacher" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
           <label style="">推荐人:</label>
-          <el-input :disabled="dis" v-model="row.referrer" style="width: 240px;"></el-input>
+          <el-input v-model="row.referrer" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
           <label style="">备注信息:</label>
-          <el-input :disabled="dis" type="textarea" v-model="row.remark" style="width: 90%;"></el-input>
+          <el-input type="textarea" v-model="row.remark" style="width: 90%;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
-        <!-- <div class="BoxItemList"> -->
-        <!-- <label style="">库存详情</label> -->
-        <!-- <el-button type="primary" @click="updateXinx" plain>修改信息</el-button>
-          <el-button v-if="!dis" @click='accomplish' type="success" plain>完成</el-button -->
-        <!-- </div> -->
+        <div class="BoxItemList">
+          <!-- <label style="">库存详情</label> -->
+          <el-button type="success" plain @click="addFen">录入</el-button>
+        </div>
       </div>
     </div>
     <div class="operationBoxItem" style="padding: 0 20px; ">
       <div class="boxImg boxImgA">
-        <el-upload :disabled="dis" class="avatar-uploader showUploader" list-type="picture-card" ref="businessLicense"
-          action :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove"
-          :before-remove="beforeRemove" :on-change="uploadSectionFile" :limit="1">
-          <img v-if="photo" :src="row.img" class="avatar">
+        <el-upload class="avatar-uploader showUploader" list-type="picture-card" ref="businessLicense" action
+          :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove"
+          :on-change="uploadSectionFile" :limit="1">
+          <img v-if="photo" :src="photo" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
+        <p class="pp">注:请上传2寸或1存照片</p>
       </div>
     </div>
 
@@ -107,41 +107,53 @@
       return {
         url: 'http://localhost/xinxiPHP/',
         // url:'http://xinxi.hd512.com/xinxiPHP/',
+        files: {},
+        photo: '',
+        photoObj: '',
         // boxShow:false,
-        dis: true,
-        photo: true,
         row: {
+          name:'',
+          sex:'',
+          age:'',
+          codes:'',
+          tel:'',
+          HomeAddress:'',
+          newAddress:'',
+          fatherName:'',
+          fatherTel:'',
+          motherName:'',
+          motherTel:'',
+          schooling:'',
+          enrollment:'',
+          major:'',
+          majorTeacher:'',
+          referrer:'',
+          remark:''
+        },
+        titleBoxitem: "",
+        number: 3,
+        numberZhan: 1,
+        dialogImageUrl: '',
+        dialogVisible: false,
+        disabled: false,
+        show: true,
+        formLabelWidth: '120px',
+        form: {
           name: '',
-          sex: '',
-          age: '',
-          codes: '',
-          tel: '',
-          HomeAddress: '',
-          newAddress: '',
-          fatherName: '',
-          fatherTel: '',
-          motherName: '',
-          motherTel: '',
-          schooling: '',
-          enrollment: '',
-          major: '',
-          majorTeacher: '',
-          referrer: '',
-          remark: '',
-          img: ''
-        }
-      }
+          num: ''
+        },
+        dialogFormVisible: false,
+        titleBox: "",
+        num: '',
+        selectItem: '',
+        input: '',
+      };
     },
-    mounted() {
-      this.info()
-      
-    },
+    mounted() {},
     methods: {
-      logign() {
-        this.$router.push({
-          name: 'index'
-        });
-      },
+      // uploadDisabled:function() {
+      //         return this.imagelist.length >0
+      //     },
       changeKey(file, fileList) {
         console.log(file, fileList)
       },
@@ -180,23 +192,74 @@
           return;
         }
         this.files = file;
+        // FormData 对象
+        // var formData = new FormData();
+
+        // 文件对象
+        // var formData= this.files
         console.log(this.files.url)
+        // let config = {
+        //   headers: {
+        //     'Content-Type': 'multipart/form-data'
+        //   },
+        //   methods: 'post'
+        // }
+        // this.$axios.get(this.url+"upload.php", {params:{formData:JSON.stringify(file)}}).then(res => {
+        //   console.log(res)
+        //   // if (res.data.flag == 'S') {
+        //   //   this.photoObj = res.data.data.objectId
+        //   //   this.photo = res.data.data.url
+        //   // } else {
+        //   //   this.$message.error(res.data.message)
+        //   // }
+        // })
       },
+
       handleRemove(file) {
         console.log(file);
       },
-      info() {
-        this.$axios.get(this.url + 'codes.php', {
-          params: {
-            codes: this.$route.params.code
-          }
-        }).then(res => {
-          // console.log(res.data)
-          this.row = res.data[0]
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      },
+      handleDownload(file) {
+        console.log(file);
+      },
+      handleSelectChange() {},
+      handleChange(e) {
+        console.log(e)
+      },
+      addFen() { //点击添加按钮时
+     // 将数据添加到数据库中
+        // console.log(this.form)
+        this.row.img=this.files.url
+        this.$axios.get(this.url+'addXinxi.php', {params:{row:JSON.stringify(this.row)}}).then(res => {
+            console.log(res)
+            if(res.data=='ok'){
+              alert('录入成功')
+            }else{
+              alert('请输入正确的信息')
+            }
         })
+      },
+      modification(val) { //点击修改时
+        console.log(val)
+        this.titleBox = "修改" + val.name + "库存"
+        this.form = val
+        this.show = true
+        this.dialogFormVisible = true
+      },
+      deleteById(val, index) {
+        this.confirmItem = "您确定要删除" + val.name + "的库存么"
+        this.subbranch.splice(index, 1)
+        this.$notify({
+          title: '成功',
+          message: val.name + " 库存删除成功",
+          type: 'success'
+        });
       }
     }
-  }
+  };
 </script>
 
 <style>
@@ -307,16 +370,17 @@
 
   .boxImg {
     margin-top: 40px;
-    /* width: 100px; */
     height: 100%;
     display: flex;
     /* align-items: center; */
     flex-direction: column;
   }
 
-  textarea:disabled,
-  input:disabled {
-    background-color: #FFFFFF !important;
-    color: #333333 !important;
+  .pp {
+    color: #666;
+    font-size: 12px;
+  }
+  .disabled .el-upload--picture-card {
+      display: none;
   }
 </style>

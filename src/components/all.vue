@@ -3,7 +3,8 @@
     <div class="man-box-h">
       <div class="man-box-h-l">
         <div class="demo-input-suffix" style="color: #000;font-size: 18px;">学员信息查询
-          <el-input placeholder="请输入学员身份证或联系方式" @keyup.enter.native="input_phone_native" @blur="input_phone_blur" v-model="input_phone" style="width: 300px;margin:0 20px;">
+          <el-input placeholder="请输入学员身份证或联系方式" @keyup.enter.native="input_phone_native" @blur="input_phone_blur"
+            v-model="input_phone" style="width: 300px;margin:0 20px;">
           </el-input>
           <el-button type="primary" icon="el-icon-search" @click="inquire_phone">搜索</el-button>
         </div>
@@ -16,7 +17,7 @@
     <!-- 表格 -->
     <div class="man-content-table">
       <el-table :data="tableData.slice((currpage-1)*pagesize,currpage*pagesize)" style="width: 100%" class="tablebox">
-        <el-table-column prop="name" label="姓名" width="200">
+        <el-table-column prop="name" label="姓名" width="150">
         </el-table-column>
         <el-table-column prop="sex" label="性别" width="150">
         </el-table-column>
@@ -24,7 +25,7 @@
         </el-table-column>
         <el-table-column prop="tel" label="手机号" width="150">
         </el-table-column>
-        <el-table-column prop="codes" label="身份证" width="150">
+        <el-table-column prop="codes" label="身份证" width="200">
         </el-table-column>
         <el-table-column prop="major" label="所学专业" width="150">
         </el-table-column>
@@ -48,37 +49,6 @@
       </div>
     </div>
 
-    <!-- 模态框 -->
-    <el-dialog :title="'用户ID：'+details[0].userId" :visible.sync="modal" width="45%">
-      <div style="width: 100%;">
-        <div style="font-weight: 700; font-size: 20px; margin-bottom: 10px;">客户信息:</div>
-        <el-table :data="details" size="mini">
-          <el-table-column property="username" label="用户"></el-table-column>
-          <el-table-column property="phone" label="电话"></el-table-column>
-          <el-table-column property="date" label="加入时间"></el-table-column>
-          <el-table-column property="integral" label="积分"></el-table-column>
-          <el-table-column property="vip" label="vip"></el-table-column>
-        </el-table>
-        <div style="font-weight: 700; font-size: 20px; margin: 10px 0;">消费记录:</div>
-        <el-table :data="details" size="mini">
-          <el-table-column property="order" label="订单编号" width="95"></el-table-column>
-          <el-table-column property="ordername" label="订单名称"></el-table-column>
-          <el-table-column property="count" label="数量"></el-table-column>
-          <el-table-column property="integral" label="积分"></el-table-column>
-          <el-table-column property="price" label="交易金额"></el-table-column>
-          <el-table-column property="consumption" label="消费时间" width="150"></el-table-column>
-        </el-table>
-      </div>
-      <div class="diaBox" style="width: 100%; display: flex; justify-content:flex-end; margin-top: 15px;">
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-          :current-page.sync="currpage" :page-size="pagesize" layout="total, prev, pager, next, jumper"
-          :total="tableData.length">
-        </el-pagination>
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="modal = false">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -106,40 +76,60 @@
       },
       // 录入信息
       addXinxi() {
-        this.modal = true
+        // this.modal = true
+        this.$router.push({
+          name: 'addXinxi'
+        });
       },
       // 手机号查询
       inquire_phone() {
-        if(this.input_phone==''){
+        if (this.input_phone == '') {
           alert('请输入查询条件')
           return false;
         }
         // console.log(this.input_phone);
-        this.$axios.get(this.url+'search.php',{
-          params:{codes:this.input_phone}
-        }).then(res=>{
-            console.log(res.data)
-             this.tableData = res.data
-
+        this.$axios.get(this.url + 'search.php', {
+          params: {
+            codes: this.input_phone
+          }
+        }).then(res => {
+          console.log(res.data)
+          this.tableData = res.data
         })
       },
-      input_phone_native(){
+      input_phone_native() {
         this.inquire_phone()
       },
-      input_phone_blur(){
-        if(this.input_phone==''){
-            this.info()
+      input_phone_blur() {
+        if (this.input_phone == '') {
+          this.info()
         }
       },
       // 详情
       handleClick(row) {
-        console.log(row);
-        // this.modal = true
-        this.details[0] = row
+        // console.log(row.codes);
+        this.$router.push({
+          name: 'updateXinxi',
+          params: {
+            row: row
+          }
+        });
       },
       // 删除
       delClick(index) {
-        console.log(index)
+        this.$axios.get(this.url + 'del.php', {
+          params: {
+            id: index
+          }
+        }).then(res => {
+          console.log(res.data)
+          if (res.data == 'ok') {
+            alert('删除成功')
+            this.info()
+          } else {
+            alert('删除失败')
+          }
+        })
       },
       // 分页--每页条数
       handleSizeChange(val) {
