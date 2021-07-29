@@ -1,102 +1,110 @@
 <template>
-  <div class="operationBox">
-    <div class="operationBoxItem">
-      <div class="titleBox">
-        学员信息
-        <el-button type="primary" @click='goback' style="margin-left: 20px;">返回</el-button>
+  <div>
+    <form class="operationBox" role="form" :action="this.url+'updateXx.php'" method="post"
+      enctype="multipart/form-data">
+      <div class="operationBoxItem">
+        <div class="titleBox">
+          学员信息
+          <el-button type="primary" @click='goback' style="margin-left: 20px;">返回</el-button>
+        </div>
+        <div class="BoxItem">
+          <input type="hidden" name="id" v-model="row.id" value="" />
+          <div class="BoxItemList">
+            <label>姓名:</label>
+            <el-input :disabled="dis" name='name' v-model="row.name" style="width: 240px;"></el-input>
+            <label>性别:</label>
+            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+            <el-input :disabled="dis" name='sex' v-model="row.sex" style="width: 60px;"></el-input>
+            <label>年龄:</label>
+            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+            <el-input :disabled="dis" name='age' v-model="row.age" style="width: 60px;"></el-input>
+          </div>
+          <div class="BoxItemList">
+            <label>联系电话:</label>
+            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+            <el-input :disabled="dis" name='tel' v-model="row.tel" style="width: 240px;"></el-input>
+            <label>身份证:</label>
+            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
+            <el-input :disabled="dis" name='codes' v-model="row.codes" style="width: 240px;"></el-input>
+          </div>
+          <div class="BoxItemList">
+            <label>家庭住址:</label>
+            <el-input :disabled="dis" name='HomeAddress' v-model="row.HomeAddress" style="width: 90%;"></el-input>
+            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.price}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <label style="">现居地:</label>
+            <el-input :disabled="dis" name='newAddress' v-model="row.newAddress" style="width: 90%;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="lianxi">联系人信息</div>
+          <div class="BoxItemList">
+            <label style="">父亲姓名:</label>
+            <el-input :disabled="dis" name='fatherName' v-model="row.fatherName" style="width: 240px;"></el-input>
+            <label style="">联系电话:</label>
+            <el-input :disabled="dis" name='fatherTel' v-model="row.fatherTel" style="width: 240px;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <label style="">母亲姓名:</label>
+            <el-input :disabled="dis" name='motherName' v-model="row.motherName" style="width: 240px;"></el-input>
+            <label style="">联系电话:</label>
+            <el-input :disabled="dis" name='motherTel' v-model="row.motherTel" style="width: 240px;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <label style="">学制:</label>
+            <el-input :disabled="dis" name='schooling' v-model="row.schooling" style="width: 240px;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <label style="">入学时间:</label>
+            <el-input :disabled="dis" name='enrollment' v-model="row.enrollment" style="width: 240px;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <label style="">所学专业:</label>
+            <el-input :disabled="dis" name='major' v-model="row.major" style="width: 240px;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <label style="">专业老师:</label>
+            <el-input :disabled="dis" name='majorTeacher' v-model="row.majorTeacher" style="width: 240px;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <label style="">推荐人:</label>
+            <el-input :disabled="dis" name='referrer' v-model="row.referrer" style="width: 240px;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <label style="">备注信息:</label>
+            <el-input :disabled="dis" name='remark' type="textarea" v-model="row.remark" style="width: 90%;"></el-input>
+            <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+          </div>
+          <div class="BoxItemList">
+            <!-- <label style="">库存详情</label> -->
+            <el-button type="primary" @click="updateXinx" plain>修改信息</el-button>
+            <input v-if="!dis" type="submit" id="" class="suv" name="" value="完成" />
+            <!-- <el-button v-if="!dis" @click='accomplish' type="success" plain>完成</el-button> -->
+          </div>
+        </div>
       </div>
-      <div class="BoxItem">
-        <div class="BoxItemList">
-          <label>姓名:</label>
-          <el-input :disabled="dis" v-model="row.name" style="width: 240px;"></el-input>
-          <label>性别:</label>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.sex" style="width: 60px;"></el-input>
-          <label>年龄:</label>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.age" style="width: 60px;"></el-input>
-        </div>
-        <div class="BoxItemList">
-          <label>联系电话:</label>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.tel" style="width: 240px;"></el-input>
-          <label>身份证:</label>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
-          <el-input :disabled="dis" v-model="row.codes" style="width: 240px;"></el-input>
-        </div>
-        <div class="BoxItemList">
-          <label>家庭住址:</label>
-          <el-input :disabled="dis" v-model="row.HomeAddress" style="width: 90%;"></el-input>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.price}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <label style="">现居地:</label>
-          <el-input :disabled="dis" v-model="row.newAddress" style="width: 90%;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="lianxi">联系人信息</div>
-        <div class="BoxItemList">
-          <label style="">父亲姓名:</label>
-          <el-input :disabled="dis" v-model="row.fatherName" style="width: 240px;"></el-input>
-          <label style="">联系电话:</label>
-          <el-input :disabled="dis" v-model="row.fatherTel" style="width: 240px;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <label style="">母亲姓名:</label>
-          <el-input :disabled="dis" v-model="row.motherName" style="width: 240px;"></el-input>
-          <label style="">联系电话:</label>
-          <el-input :disabled="dis" v-model="row.motherTel" style="width: 240px;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <label style="">学制:</label>
-          <el-input :disabled="dis" v-model="row.schooling" style="width: 240px;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <label style="">入学时间:</label>
-          <el-input :disabled="dis" v-model="row.enrollment" style="width: 240px;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <label style="">所学专业:</label>
-          <el-input :disabled="dis" v-model="row.major" style="width: 240px;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <label style="">专业老师:</label>
-          <el-input :disabled="dis" v-model="row.majorTeacher" style="width: 240px;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <label style="">推荐人:</label>
-          <el-input :disabled="dis" v-model="row.referrer" style="width: 240px;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <label style="">备注信息:</label>
-          <el-input :disabled="dis" type="textarea" v-model="row.remark" style="width: 90%;"></el-input>
-          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
-        </div>
-        <div class="BoxItemList">
-          <!-- <label style="">库存详情</label> -->
-          <el-button type="primary" @click="updateXinx" plain>修改信息</el-button>
-          <el-button v-if="!dis" @click='accomplish' type="success" plain>完成</el-button>
+      <div class="operationBoxItem" style="padding: 0 20px; ">
+        <div class="boxImg boxImgA">
+          <!-- <el-upload :disabled="dis" class="avatar-uploader showUploader" list-type="picture-card" ref="businessLicense"
+          action :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove"
+          :before-remove="beforeRemove" :on-change="uploadSectionFile" :limit="1">
+          <img v-if="photo" :src="row.img" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload> -->
+          <input type="file" v-if="imgactive" name="file" @change="tirggerFile($event)" />
+          <!-- <img style="width: 140px; height: 160px;"  v-if="imgUrl!=''" :src="imgUrl"> -->
+          <img style="width: 140px; height: 160px;" v-if="row.img!=''" :src="row.img">
+          <p class="pp">注:请上传2寸或1存照片</p>
         </div>
       </div>
-    </div>
-    <div class="operationBoxItem" style="padding: 0 20px; ">
-      <div class="boxImg boxImgA">
-       <el-upload :disabled="dis" class="avatar-uploader showUploader" list-type="picture-card" ref="businessLicense" action
-         :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove"
-         :on-change="uploadSectionFile" :limit="1">
-         <img v-if="photo" :src="row.img" class="avatar">
-         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-       </el-upload>
-      </div>
-    </div>
-
+    </form>
   </div>
 </template>
 
@@ -108,9 +116,12 @@
         url: 'http://localhost/xinxiPHP/',
         // url:'http://xinxi.hd512.com/xinxiPHP/',
         // boxShow:false,
-        dis:true,
-        photo:true,
+        imgUrl: '',
+        imgactive: false,
+        dis: true,
+        photo: true,
         row: {
+          id: '',
           name: '',
           sex: '',
           age: '',
@@ -133,74 +144,52 @@
       }
     },
     mounted() {
+      this.deng()
       this.info()
     },
     methods: {
-      goback(){
-      //返回首页
-        this.$router.push({name:'all'});
+      deng() {
+        if (!this.$route.params.row) {
+          // alert('')
+          this.$router.push({
+            name: 'all'
+          });
+        }
       },
-      changeKey(file, fileList) {
-        console.log(file, fileList)
-      },
-      uploadFileSuccess(response, file, fileList) {
-        console.log("成功")
-        // 上传成功的回调，将其名称返回给后台
-        // console.log(response, file, fileList)
-        // if (response.data.error == 0) {
-        // 	file.response = response.data.data;
-        // 	this.fileList.push(file)
-        // } else {
-        // 	this.$message.error(response.data.message); //文件上传错误提示
+      tirggerFile: function(event) {
+        let file = event.target.files[0];
+        // console.log(file.size)
+        // if(!file.size / 1024 / 1024 < 3){
+        //    alert('上传图片过大')
+        //    return false;
         // }
-
+        let url = "";
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        let that = this;
+        reader.onload = function(e) {
+          url = this.result.substring(this.result.indexOf(",") + 1);
+          // that.imgUrl = "data:image/png;base64," + url;
+          that.row.img = "data:image/png;base64," + url;
+          // that.$refs['imgimg'].setAttribute('src','data:image/png;base64,'+url);
+        };
       },
-      handlePreview(file) {
-        console.log(file);
+      goback() {
+        // console.log(this.$route.params.row.codes)
+        //返回首页
+        this.$router.push({
+          name: 'all'
+        });
       },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
-      },
-      uploadSectionFile(file) {
-        const typeArr = ['image/png', 'image/gif', 'image/jpeg', 'image/jpg'];
-        const isJPG = typeArr.indexOf(file.raw.type) !== -1;
-        const isLt3M = file.size / 1024 / 1024 < 3;
-        if (!isJPG) {
-          this.$message.error('只能是图片!');
-          this.$refs.upload.clearFiles();
-          this.files = null;
-          return;
+      updateXinx() {
+        this.dis = false
+        this.imgactive = !this.imgactive
+        this.row.img=''
+        for (var k in this.row) {
+          if (this.row[k] == '无数据') {
+            this.row[k] = ''
+          }
         }
-        if (!isLt3M) {
-          this.$message.error('上传图片大小不能超过 3MB!');
-          this.$refs.upload.clearFiles();
-          this.files = null;
-          return;
-        }
-        this.files = file;
-        console.log(this.files.url)
-      },
- handleRemove(file) {
-        console.log(file);
-      },
-      accomplish(){
-        // 修改信息
-          // console.log( this.$route.params.row.id)
-          this.$axios.get(this.url+'updateXx.php', {params:{row:JSON.stringify(this.row)}}).then(res => {
-              console.log(res)
-              if(res.data=='ok'){
-                alert('修改成功')
-                this.info()
-                this.dis=true
-                this.photo=true
-              }else{
-                alert('请输入正确的信息')
-
-              }
-          })
-      },
-      updateXinx(){
-        this.dis=false
       },
       info() {
         this.$axios.get(this.url + 'xinxiid.php', {
@@ -222,7 +211,6 @@
 </script>
 
 <style>
-
   .boxImg::-webkit-scrollbar {
     width: 2px;
     background: #eee;
@@ -330,15 +318,78 @@
 
   .boxImg {
     margin-top: 40px;
-    /* width: 100px; */
     height: 100%;
     display: flex;
     /* align-items: center; */
     flex-direction: column;
   }
+
+  .pp {
+    color: #666;
+    font-size: 12px;
+  }
+
+  .disabled .el-upload--picture-card {
+    display: none;
+  }
+
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+
   textarea:disabled,
-  input:disabled{
-  background-color: #FFFFFF !important;
-  color:#333333 !important;
+  input:disabled {
+    background-color: #FFFFFF !important;
+    color: #333333 !important;
+  }
+
+  .suv {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid #DCDFE6;
+    color: #67C23A;
+    -webkit-appearance: none;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
+    margin-left: 30px;
+    -webkit-transition: .1s;
+    transition: .1s;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+        background: #f0f9eb;
+        border-color: #c2e7b0;
+  }
+  .suv:hover{
+    background-color:#67C23A;
+    color: #FFFFFF;
   }
 </style>

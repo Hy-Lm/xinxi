@@ -1,22 +1,19 @@
 <template>
-    <div id="shouye">
-      <div class="index">
-        <!-- 首页登录 -->
-        <div>
-          <label>账号:</label>
-          <input v-model.trim="name" ref='name' placeholder="请输入账号">
-        </div>
-        <div>
-          <label>密码:</label>
-          <input v-model.trim="pass" ref='pass' placeholder="请输入密码">
-        </div>
-        <!-- <div v-if="psss" class="psss">请输入正确的密码</div> -->
-        <!-- <div @click="xiugai">忘记密码</div> -->
-      </div>
-      <div class="zhuce">
-        <el-button type="primary" @click='wanc'>完成</el-button>
-      </div>
-    </div>
+  <div id="shouye">
+    <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="身份证账号">
+        <el-input type="name" ref="name" placeholder="请输入身份证账号" v-model="ruleForm.name" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="注册密码">
+        <el-input type="password" ref="pass" placeholder="请输入注册密码" v-model="ruleForm.pass" autocomplete="off">
+        </el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="bb">返回</el-button>
+        <el-button type="primary" @click='wanc'>重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 
 </template>
 
@@ -27,35 +24,43 @@
       return {
         url: 'http://localhost/xinxiPHP/',
         // url:'http://xinxi.hd512.com/xinxiPHP/',
-        name: '', //登录账号
-        pass: '' //登录密码
+        ruleForm: {
+          name: '', //登录账号
+          pass: '' //登录密码
+        }
       }
     },
     methods: {
-
+      bb() {
+        this.$router.push({
+          name: 'index'
+        });
+      },
       wanc() {
-        if (!this.name) {
+        if (!this.ruleForm.name) {
           alert('请输入账号')
           this.$refs.name.focus();
           return false;
         }
-        if (!this.pass) {
+        if (!this.ruleForm.pass) {
           alert('请输入密码')
           this.$refs.pass.focus();
           return false;
         }
         this.$axios.get(this.url + 'adduser.php', {
           params: {
-            name: this.name,
-            pass: this.pass
+            name: this.ruleForm.name,
+            pass: this.ruleForm.pass
           }
         }).then(res => {
           console.log(res)
           if (res.data == 'ok') {
             alert('注册成功，请登录')
-            this.$router.push({name:'index'});
-            this.name = ''
-            this.pass = ''
+            this.$router.push({
+              name: 'index'
+            });
+            this.ruleForm.name = ''
+            this.ruleForm.pass = ''
           } else {
             alert('注册失败')
           }
@@ -66,7 +71,7 @@
 </script>
 
 <style>
-  #shouye{
+  #shouye {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

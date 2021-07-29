@@ -12,11 +12,25 @@
         url:'http://xinxi.hd512.com/xinxiPHP/',
       }
     },
+    methods:{
+      // 进去的时候判断是否有没有登录  请先登录
+      deng(){
+         if(!sessionStorage.getItem("code")){
+             alert('请先登录')
+               this.$router.push({
+                 name: 'index'
+               });
+         }
+      }
+    },
     mounted() {
-      if(this.$route.params.code=='xinxiadmin'){
-          this.$router.push({name:'all',params:{code:this.$route.params.code}});
+
+      if(sessionStorage.getItem("code")=='xinxiadmin'){
+          this.$router.push({name:'all'});
+          this.deng()
       }else{
-           this.$router.push({name:'student',params:{code:this.$route.params.code}});
+           this.$router.push({name:'student'});
+           this.deng()
       }
     }
   }

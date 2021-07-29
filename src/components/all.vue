@@ -9,31 +9,32 @@
           <el-button type="primary" icon="el-icon-search" @click="inquire_phone">搜索</el-button>
         </div>
       </div>
-      <div style="margin-right: 30px;" @click="addXinxi">
-        <el-button type="danger">录入信息</el-button>
+      <div style="margin-right: 30px;" >
+        <el-button type="danger" @click="addXinxi">录入信息</el-button>
+        <el-button type="success" @click="delll" >退出</el-button>
       </div>
     </div>
 
     <!-- 表格 -->
     <div class="man-content-table">
       <el-table :data="tableData.slice((currpage-1)*pagesize,currpage*pagesize)" style="width: 100%" class="tablebox">
-        <el-table-column prop="name" label="姓名" width="150">
+        <el-table-column prop="name" label="姓名">
         </el-table-column>
-        <el-table-column prop="sex" label="性别" width="150">
+        <el-table-column prop="sex" label="性别" >
         </el-table-column>
-        <el-table-column prop="age" label="年龄" width="150">
+        <el-table-column prop="age" label="年龄" >
         </el-table-column>
-        <el-table-column prop="tel" label="手机号" width="150">
+        <el-table-column prop="tel" label="手机号">
         </el-table-column>
-        <el-table-column prop="codes" label="身份证" width="200">
+        <el-table-column prop="codes" label="身份证" >
         </el-table-column>
-        <el-table-column prop="major" label="所学专业" width="150">
+        <el-table-column prop="major" label="所学专业" >
         </el-table-column>
-        <el-table-column prop="enrollment" label="入学时间" width="150">
+        <el-table-column prop="enrollment" label="入学时间">
         </el-table-column>
-        <el-table-column prop="referrer" label="推荐人" width="150">
+        <el-table-column prop="referrer" label="推荐人">
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="150">
+        <el-table-column fixed="right" label="操作" >
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="success" size="small" plain>详情</el-button>
             <el-button @click="delClick(scope.row.id)" type="danger" size="small" plain>删除</el-button>
@@ -42,6 +43,7 @@
       </el-table>
       <!-- 分页 -->
       <div class="man-content-pages">
+        <div class="ren">总人数 : {{tableData.length}}人</div>
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
           :current-page.sync="currpage" :page-size="pagesize" layout="total, prev, pager, next, jumper"
           :total="tableData.length">
@@ -68,6 +70,23 @@
       };
     },
     methods: {
+      delll(){
+        sessionStorage.removeItem('code')
+      // 退出
+      this.$router.push({
+        name: 'index'
+      });
+
+      },
+      // 进去的时候判断是否有没有登录  请先登录
+      deng(){
+         if(!sessionStorage.getItem("code")){
+             alert('请先登录')
+               this.$router.push({
+                 name: 'index'
+               });
+         }
+      },
       info() {
         this.$axios.get(this.url + 'info.php').then(res => {
           // console.log(res.data)
@@ -144,6 +163,7 @@
     },
     mounted() {
       this.info()
+      this.deng()
     }
   }
 </script>
@@ -153,7 +173,11 @@
   /* 	.man-content-table .el-table__body-wrapper .el-table_1_column_5 {
 		color: #EA4A3C;
 	} */
-
+  .ren{
+    font-size: 13px;
+        height: 28px;
+        line-height: 28px;
+  }
   .tablebox th,
   .tablebox tr,
   .tablebox td {
@@ -219,5 +243,11 @@
 
   .el-pagination button {
     background-color: #DEE5E7;
+  }
+  .man-content-pages{
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 </style>

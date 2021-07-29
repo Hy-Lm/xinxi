@@ -13,6 +13,6 @@ export default {
 
 <style>
   input{
-outline: none;
+    outline: none;
   }
 </style>

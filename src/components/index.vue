@@ -1,42 +1,38 @@
 <template>
   <div>
     <div id="shouye" v-if="logins">
-      <div class="index">
-        <!-- 首页登录 -->
-        <div>
-          <label>账号:</label>
-          <input v-model.trim="name" ref='name' placeholder="请输入账号">
-        </div>
-        <div>
-          <label>密码:</label>
-          <input v-model.trim="pass" ref='pass' placeholder="请输入密码">
-        </div>
-        <!-- <div v-if="psss" class="psss">请输入正确的密码</div> -->
-        <div @click="xiugai">忘记密码</div>
-      </div>
-      <div class="zhuce">
-        <div @click="login">登录</div>
-        <div @click="zhuci">注册</div>
-      </div>
+      <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="身份证账号">
+          <el-input type="name" ref="name" placeholder="请输入身份证账号" v-model="ruleForm.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input type="password" ref="pass" placeholder="请输入密码" v-model="ruleForm.pass" autocomplete="off">
+          </el-input>
+        </el-form-item>
+        <el-form-item>
+          <div class="xiugai" @click="xiugai">忘记密码</div>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="login">提交</el-button>
+          <el-button @click="zhuci">注册</el-button>
+        </el-form-item>
+      </el-form>
     </div>
     <!-- 修改密码 -->
     <div id="shou" v-else="logins">
-      <div class="index">
-        <!-- 首页登录 -->
-        <div>
-          <label>账号:</label>
-          <input v-model.trim="name" ref='name' placeholder="请输入正确的账号">
-        </div>
-        <div>
-          <label>新密码:</label>
-          <input v-model.trim="pass" ref='pass' placeholder="请输入新密码">
-        </div>
-        <!-- <div v-if="psss" class="psss">请输入正确的密码</div> -->
-        <!-- <div @click="xiugai">忘记密码</div> -->
-      </div>
-      <div class="zhuce">
-        <el-button type="primary" @click='update'>完成</el-button>
-      </div>
+      <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="身份证账号">
+          <el-input type="name" ref="name" placeholder="请输入身份证账号" v-model="ruleForm.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码">
+          <el-input type="password" ref="pass" placeholder="请输入新密码" v-model="ruleForm.pass" autocomplete="off">
+          </el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="bb">返回</el-button>
+          <el-button type="primary" @click='update'>重置</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 
@@ -49,36 +45,42 @@
       return {
         url: 'http://localhost/xinxiPHP/',
         // url:'http://xinxi.hd512.com/xinxiPHP/',
-        name: '', //登录账号
-        pass: '', //登录密码
+        ruleForm: {
+          name: '', //登录账号
+          pass: '' //登录密码
+        },
+
         logins: true
       }
     },
     methods: {
+      bb() {
+        this.logins = !this.logins
+      },
       update() {
         //修改密码
-        if (!this.name) {
+        if (!this.ruleForm.name) {
           alert('请输入账号')
           this.$refs.name.focus();
           return false;
         }
-        if (!this.pass) {
+        if (!this.ruleForm.pass) {
           alert('请输入密码')
           this.$refs.pass.focus();
           return false;
         }
         this.$axios.get(this.url + 'updatepass.php', {
           params: {
-            name: this.name,
-            pass: this.pass
+            name: this.ruleForm.name,
+            pass: this.ruleForm.pass
           }
         }).then(res => {
           console.log(res)
           if (res.data == 'ok') {
             alert('修改成功，请登录')
             this.logins = !this.logins
-            this.name = ''
-            this.pass = ''
+            this.ruleForm.name = ''
+            this.ruleForm.pass = ''
           } else {
             alert('请输入正确的账号')
           }
@@ -91,48 +93,46 @@
       },
       xiugai() {
         // console.log('修改密码')
-        this.name = ''
-        this.pass = ''
+        this.ruleForm.name = ''
+        this.ruleForm.pass = ''
         this.logins = !this.logins
       },
       login() {
-        if (!this.name) {
+        if (!this.ruleForm.name) {
           alert('请输入账号')
           this.$refs.name.focus();
           return false;
         }
-        if (!this.pass) {
+        if (!this.ruleForm.pass) {
           alert('请输入密码')
           this.$refs.pass.focus();
           return false;
         }
         this.$axios.get(this.url + 'user.php', {
           params: {
-            name: this.name,
-            pass: this.pass
+            name: this.ruleForm.name,
+            pass: this.ruleForm.pass
           }
         }).then(res => {
-            console.log(res)
-            if (res.data == 'nono') {
-                  this.$router.push({
-                    name: 'home',
-                    params: {
-                      code: this.name
-                    }
-                  });
-                  this.name = ''
-                  this.pass = ''
-              }else if(res.data=='ok'){
-                alert('该账号未注册，请先注册')
-              }else(
-                alert('请输入正确的账号或密码')
-              )
+          console.log(res)
+          if (res.data == 'nono') {
+            this.$router.push({
+              name: 'home'
+            });
+            sessionStorage.setItem('code', this.ruleForm.name)
+            this.ruleForm.name = ''
+            this.ruleForm.pass = ''
+          } else if (res.data == 'ok') {
+            alert('该账号未注册，请先注册')
+          } else(
+            alert('请输入正确的账号或密码')
+          )
 
-            })
-        }
-
+        })
       }
+
     }
+  }
 </script>
 
 <style scoped>
@@ -182,6 +182,7 @@
     justify-content: space-around;
   }
 
+  .xiugai:hover,
   .index>div:last-child:hover,
   .zhuce>div:hover {
     cursor: pointer;

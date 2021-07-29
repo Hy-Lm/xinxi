@@ -3,7 +3,7 @@
     <div class="operationBoxItem">
       <div class="titleBox">
         学员信息
-        <el-button type="primary" @click='logign' style="margin-left: 20px;">返回登录页</el-button>
+        <el-button type="primary" @click='logign' style="margin-left: 20px;">退出</el-button>
       </div>
       <div class="BoxItem">
         <div class="BoxItemList">
@@ -88,12 +88,7 @@
     </div>
     <div class="operationBoxItem" style="padding: 0 20px; ">
       <div class="boxImg boxImgA">
-        <el-upload :disabled="dis" class="avatar-uploader showUploader" list-type="picture-card" ref="businessLicense"
-          action :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove"
-          :before-remove="beforeRemove" :on-change="uploadSectionFile" :limit="1">
-          <img v-if="photo" :src="row.img" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+          <img style="width: 140px; height: 160px;" :src="row.img">
       </div>
     </div>
 
@@ -134,65 +129,35 @@
     },
     mounted() {
       this.info()
-      
+      this.deng()
     },
     methods: {
+      // 进去的时候判断是否有没有登录  请先登录
+     deng(){
+        if(!sessionStorage.getItem("code")){
+            alert('请先登录')
+              this.$router.push({
+                name: 'index'
+              });
+        }
+     },
       logign() {
+        sessionStorage.removeItem('code')
         this.$router.push({
           name: 'index'
         });
       },
-      changeKey(file, fileList) {
-        console.log(file, fileList)
-      },
-      uploadFileSuccess(response, file, fileList) {
-        console.log("成功")
-        // 上传成功的回调，将其名称返回给后台
-        // console.log(response, file, fileList)
-        // if (response.data.error == 0) {
-        // 	file.response = response.data.data;
-        // 	this.fileList.push(file)
-        // } else {
-        // 	this.$message.error(response.data.message); //文件上传错误提示
-        // }
-
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
-      },
-      uploadSectionFile(file) {
-        const typeArr = ['image/png', 'image/gif', 'image/jpeg', 'image/jpg'];
-        const isJPG = typeArr.indexOf(file.raw.type) !== -1;
-        const isLt3M = file.size / 1024 / 1024 < 3;
-        if (!isJPG) {
-          this.$message.error('只能是图片!');
-          this.$refs.upload.clearFiles();
-          this.files = null;
-          return;
-        }
-        if (!isLt3M) {
-          this.$message.error('上传图片大小不能超过 3MB!');
-          this.$refs.upload.clearFiles();
-          this.files = null;
-          return;
-        }
-        this.files = file;
-        console.log(this.files.url)
-      },
-      handleRemove(file) {
-        console.log(file);
-      },
       info() {
         this.$axios.get(this.url + 'codes.php', {
           params: {
-            codes: this.$route.params.code
+            codes: sessionStorage.getItem("code")
           }
         }).then(res => {
-          // console.log(res.data)
+          console.log(res.data)
           this.row = res.data[0]
+          // if(this.row==[]){
+          //   alert('未录入')
+          // }
         })
       }
     }
