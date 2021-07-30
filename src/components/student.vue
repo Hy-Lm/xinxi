@@ -6,25 +6,40 @@
         <el-button type="primary" @click='logign' style="margin-left: 20px;">退出</el-button>
       </div>
       <div class="BoxItem">
-        <div class="BoxItemList">
-          <label>姓名:</label>
-          <el-input :disabled="dis" v-model="row.name" style="width: 240px;"></el-input>
-          <label>性别:</label>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.sex" style="width: 60px;"></el-input>
-          <label>年龄:</label>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.age" style="width: 60px;"></el-input>
+        <div class="box">
+          <div>
+            <div class="BoxItemList">
+              <label>姓名:</label>
+              <el-input :disabled="dis" v-model="row.name" name="name" style="width: 240px;"></el-input>
+            </div>
+            <div class="BoxItemList">
+              <label>性别:</label>
+              <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+              <el-input :disabled="dis" v-model="row.sex" name="sex" style="width: 60px;"></el-input>
+              <label>年龄:</label>
+              <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+              <el-input :disabled="dis" v-model="row.age" name="age" style="width: 60px;"></el-input>
+            </div>
+            <div class="BoxItemList">
+              <label>联系电话:</label>
+              <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+              <el-input :disabled="dis" v-model="row.tel" name="tel" style="width: 240px;"></el-input>
+            </div>
+            <div class="BoxItemList">
+              <label>身份证:</label>
+              <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
+              <el-input :disabled="dis" v-model="row.codes" name="codes" style="width: 240px;"></el-input>
+            </div>
+          </div>
+          <div>
+            <div class="BoxItemList BoxItemimg">
+              <!-- <input style="text-align: center;" type="file" name="file" @change="tirggerFile($event)" /> -->
+              <img class="imgs" v-if="row.img!=''" :src="row.img">
+              <p class="pp" :style="{'text-align': (row.img!=''? 'center':'')}">注:请上传2寸或1存照片</p>
+            </div>
+          </div>
         </div>
-        <div class="BoxItemList">
-          <label>联系电话:</label>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-          <el-input :disabled="dis" v-model="row.tel" style="width: 240px;"></el-input>
-          <label>身份证:</label>
-          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
-          <el-input :disabled="dis" v-model="row.codes" style="width: 240px;"></el-input>
-        </div>
-        <div class="BoxItemList">
+        <div class="BoxItemList address">
           <label>家庭住址:</label>
           <el-input :disabled="dis" v-model="row.HomeAddress" style="width: 90%;"></el-input>
           <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.price}}</div> -->
@@ -79,16 +94,6 @@
           <el-input :disabled="dis" type="textarea" v-model="row.remark" style="width: 90%;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
-        <!-- <div class="BoxItemList"> -->
-        <!-- <label style="">库存详情</label> -->
-        <!-- <el-button type="primary" @click="updateXinx" plain>修改信息</el-button>
-          <el-button v-if="!dis" @click='accomplish' type="success" plain>完成</el-button -->
-        <!-- </div> -->
-      </div>
-    </div>
-    <div class="operationBoxItem" style="padding: 0 20px; ">
-      <div class="boxImg boxImgA">
-          <img style="width: 140px; height: 160px;" :src="row.img">
       </div>
     </div>
 
@@ -100,8 +105,8 @@
   export default {
     data() {
       return {
-        url: 'http://localhost/xinxiPHP/',
-        // url:'http://xinxi.hd512.com/xinxiPHP/',
+        // url: 'http://localhost/xinxiPHP/',
+        url:'http://xinxi.hd512.com/xinxiPHP/',
         // boxShow:false,
         dis: true,
         photo: true,
@@ -133,14 +138,14 @@
     },
     methods: {
       // 进去的时候判断是否有没有登录  请先登录
-     deng(){
-        if(!sessionStorage.getItem("code")){
-            alert('请先登录')
-              this.$router.push({
-                name: 'index'
-              });
+      deng() {
+        if (!sessionStorage.getItem("code")) {
+          alert('请先登录')
+          this.$router.push({
+            name: 'index'
+          });
         }
-     },
+      },
       logign() {
         sessionStorage.removeItem('code')
         this.$router.push({
@@ -164,7 +169,25 @@
   }
 </script>
 
-<style>
+<style scoped lang="scss">
+   input{
+    border: none !important;
+  }
+  .imgs {
+    width: 140px;
+    height: 200px;
+    @media screen and (max-width:1000px){
+        width: 100%;
+        // height: 100%;
+      };
+  }
+
+  // #app{
+  //   @media screen and (max-width:1000px){
+  //     width: 100vw;
+  //   }
+  // }
+
   .boxImg::-webkit-scrollbar {
     width: 2px;
     background: #eee;
@@ -218,6 +241,11 @@
     width: 100px;
     text-align: right;
     font-size: 18px;
+
+    @media screen and (max-width:1000px) {
+      font-size: 16px;
+      text-align: left;
+    }
   }
 
   .BoxItemList label {
@@ -226,9 +254,15 @@
     margin-right: 20px;
     width: 100px;
     text-align: right;
+
     /* text-align-last: justify;
     text-align: justify;
     text-justify: distribute-all-lines; */
+    @media screen and (max-width:1000px) {
+      width: 20%;
+      font-size: 12px;
+      margin-right: 5px;
+    }
   }
 
   .BoxItemList {
@@ -236,6 +270,19 @@
     height: 60px;
     display: flex;
     align-items: center;
+    @media screen and (max-width:1000px){
+        & label{
+          width:50px;
+          // width: 60px !important;
+        }
+        // &:nth-child(2) div{
+        //     width: 100px !important;
+        // }
+        &:nth-child(5) label,
+        &:nth-child(6) label{
+          width:100px;
+        }
+      };
   }
 
   .BoxItemList:last-child {
@@ -247,13 +294,22 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
+
   }
 
   .operationBoxItem {
+    padding: 10px 30px;
+    box-sizing: border-box;
+    margin: auto;
     width: 48%;
     height: 100%;
     background: #fff;
-    margin: 0 20px;
+    border: 1px solid rgba(153, 153, 153, .3);
+    /* margin: 0 20px; */
+    @media screen and (max-width:1000px) {
+      width: 100%;
+     padding: 10px;
+    }
   }
 
   .titleBox {
@@ -262,6 +318,13 @@
     font-size: 20px;
     font-weight: 700;
     color: #000;
+
+    @media screen and (max-width:1000px) {
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   .BoxItem {
@@ -284,4 +347,52 @@
     background-color: #FFFFFF !important;
     color: #333333 !important;
   }
+
+  .pp {
+    /* text-align: center; */
+    color: #666;
+    font-size: 12px;
+    width: 252px;
+    @media screen and (max-width:1000px){
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+        // width: 252px;
+    }
+  }
+
+  .box {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+      @media screen and (max-width:1000px){
+        width: 100%;
+      }
+  }
+.box>div:nth-child(1){
+    @media screen and (max-width:1000px){
+        width:70%;
+      }
+}
+  .box>div:nth-child(2) {
+    width: 100%;
+    margin: auto;
+    @media screen and (max-width:1000px){
+        width:30%;
+        padding:0 5px;
+      }
+  }
+
+  .BoxItemimg {
+    /* margin: auto; */
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center
+  }
+  // .address{
+  // @media screen and (max-width:1000px) {
+  //       width: 90% !important;
+  //     }
+  // }
 </style>

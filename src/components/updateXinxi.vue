@@ -9,23 +9,42 @@
         </div>
         <div class="BoxItem">
           <input type="hidden" name="id" v-model="row.id" value="" />
-          <div class="BoxItemList">
-            <label>姓名:</label>
-            <el-input :disabled="dis" name='name' v-model="row.name" style="width: 240px;"></el-input>
-            <label>性别:</label>
-            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-            <el-input :disabled="dis" name='sex' v-model="row.sex" style="width: 60px;"></el-input>
-            <label>年龄:</label>
-            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-            <el-input :disabled="dis" name='age' v-model="row.age" style="width: 60px;"></el-input>
-          </div>
-          <div class="BoxItemList">
-            <label>联系电话:</label>
-            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-            <el-input :disabled="dis" name='tel' v-model="row.tel" style="width: 240px;"></el-input>
-            <label>身份证:</label>
-            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
-            <el-input :disabled="dis" name='codes' v-model="row.codes" style="width: 240px;"></el-input>
+          <div class="box">
+            <div>
+              <div class="BoxItemList">
+                <label>姓名:</label>
+                <el-input :disabled="dis" v-model="row.name" name="name" style="width: 240px;"></el-input>
+              </div>
+              <div class="BoxItemList">
+                <label>性别:</label>
+                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+                <el-input :disabled="dis" v-model="row.sex" name="sex" style="width: 60px;"></el-input>
+                <label>年龄:</label>
+                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+                <el-input :disabled="dis" v-model="row.age" name="age" style="width: 60px;"></el-input>
+              </div>
+              <div class="BoxItemList">
+                <label>联系电话:</label>
+                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+                <el-input :disabled="dis" v-model="row.tel" name="tel" style="width: 240px;"></el-input>
+              </div>
+              <div class="BoxItemList">
+                <label>身份证:</label>
+                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
+                <el-input :disabled="dis" v-model="row.codes" name="codes" style="width: 240px;"></el-input>
+              </div>
+            </div>
+            <div>
+              <div class="BoxItemList BoxItemimg">
+                <!-- <input type="file" v-if="imgactive" name="file" @change="tirggerFile($event)" />
+                <img style="width: 140px; height: 160px;" v-if="row.img!=''" :src="row.img">
+                <p class="pp">注:请上传2寸或1存照片</p> -->
+                <input class="file" style="text-align: center;" v-if="imgactive" type="file" name="file"
+                  @change="tirggerFile($event)" />
+                <img class="imgs" v-if="row.img!=''" :src="row.img">
+                <p class="pp" :style="{'text-align': (row.img!=''? 'center':'')}">注:请上传2寸或1存照片</p>
+              </div>
+            </div>
           </div>
           <div class="BoxItemList">
             <label>家庭住址:</label>
@@ -90,20 +109,13 @@
           </div>
         </div>
       </div>
-      <div class="operationBoxItem" style="padding: 0 20px; ">
+      <!-- <div class="operationBoxItem" style="padding: 0 20px; ">
         <div class="boxImg boxImgA">
-          <!-- <el-upload :disabled="dis" class="avatar-uploader showUploader" list-type="picture-card" ref="businessLicense"
-          action :auto-upload="false" :on-preview="handlePreview" :on-remove="handleRemove"
-          :before-remove="beforeRemove" :on-change="uploadSectionFile" :limit="1">
-          <img v-if="photo" :src="row.img" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload> -->
           <input type="file" v-if="imgactive" name="file" @change="tirggerFile($event)" />
-          <!-- <img style="width: 140px; height: 160px;"  v-if="imgUrl!=''" :src="imgUrl"> -->
           <img style="width: 140px; height: 160px;" v-if="row.img!=''" :src="row.img">
           <p class="pp">注:请上传2寸或1存照片</p>
         </div>
-      </div>
+      </div> -->
     </form>
   </div>
 </template>
@@ -113,8 +125,8 @@
   export default {
     data() {
       return {
-        url: 'http://localhost/xinxiPHP/',
-        // url:'http://xinxi.hd512.com/xinxiPHP/',
+        // url: 'http://localhost/xinxiPHP/',
+        url:'http://xinxi.hd512.com/xinxiPHP/',
         // boxShow:false,
         imgUrl: '',
         imgactive: false,
@@ -184,7 +196,7 @@
       updateXinx() {
         this.dis = false
         this.imgactive = !this.imgactive
-        this.row.img=''
+        this.row.img = ''
         for (var k in this.row) {
           if (this.row[k] == '无数据') {
             this.row[k] = ''
@@ -210,7 +222,18 @@
   }
 </script>
 
-<style>
+<style  lang="scss">
+  .imgs {
+    width: 140px;
+    height: 200px;
+
+    @media screen and (max-width:1000px) {
+       width: 100%;
+    }
+
+    ;
+  }
+
   .boxImg::-webkit-scrollbar {
     width: 2px;
     background: #eee;
@@ -258,12 +281,24 @@
     width: 100%;
   }
 
+  .file {
+    @media screen and (max-width:1000px) {
+      width: 73px;
+    }
+  }
+
   label {}
 
   .lianxi {
     width: 100px;
     text-align: right;
     font-size: 18px;
+
+    @media screen and (max-width:1000px) {
+      font-size: 16px;
+      text-align: left;
+      margin-left: 5px;
+    }
   }
 
   .BoxItemList label {
@@ -272,9 +307,15 @@
     margin-right: 20px;
     width: 100px;
     text-align: right;
+
     /* text-align-last: justify;
-    text-align: justify;
-    text-justify: distribute-all-lines; */
+        text-align: justify;
+        text-justify: distribute-all-lines; */
+    @media screen and (max-width:1000px) {
+      width: 20%;
+      font-size: 12px;
+      margin-right: 5px;
+    }
   }
 
   .BoxItemList {
@@ -282,6 +323,22 @@
     height: 60px;
     display: flex;
     align-items: center;
+
+    @media screen and (max-width:1000px) {
+      & label {
+        width: 50px;
+        // width: 60px !important;
+      }
+
+      // &:nth-child(2) div {
+      //   width: 100px !important;
+      // }
+
+      &:nth-child(5) label,
+      &:nth-child(6) label {
+        width: 50px;
+      }
+    }
   }
 
   .BoxItemList:last-child {
@@ -293,13 +350,22 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
+
   }
 
   .operationBoxItem {
+    padding: 10px 30px;
+    box-sizing: border-box;
+    margin: auto;
     width: 48%;
     height: 100%;
     background: #fff;
-    margin: 0 20px;
+
+    /* margin: 0 20px; */
+    @media screen and (max-width:1000px) {
+      width: 100%;
+      padding: 0;
+    }
   }
 
   .titleBox {
@@ -308,6 +374,13 @@
     font-size: 20px;
     font-weight: 700;
     color: #000;
+
+    @media screen and (max-width:1000px) {
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   .BoxItem {
@@ -318,46 +391,11 @@
 
   .boxImg {
     margin-top: 40px;
+    /* width: 100px; */
     height: 100%;
     display: flex;
     /* align-items: center; */
     flex-direction: column;
-  }
-
-  .pp {
-    color: #666;
-    font-size: 12px;
-  }
-
-  .disabled .el-upload--picture-card {
-    display: none;
-  }
-
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
   }
 
   textarea:disabled,
@@ -366,30 +404,82 @@
     color: #333333 !important;
   }
 
-  .suv {
-    display: inline-block;
-    line-height: 1;
-    white-space: nowrap;
-    cursor: pointer;
-    border: 1px solid #DCDFE6;
-    color: #67C23A;
-    -webkit-appearance: none;
-    text-align: center;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    outline: 0;
-    margin-left: 30px;
-    -webkit-transition: .1s;
-    transition: .1s;
-    font-weight: 500;
-    padding: 12px 20px;
-    font-size: 14px;
-    border-radius: 4px;
-        background: #f0f9eb;
-        border-color: #c2e7b0;
+  .pp {
+    /* text-align: center; */
+    color: #666;
+    font-size: 12px;
+    width: 252px;
+    @media screen and (max-width:1000px){
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+        // width: 252px;
+    }
   }
-  .suv:hover{
-    background-color:#67C23A;
+
+  .suv {
+      display: inline-block;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid #DCDFE6;
+      color: #67C23A;
+      -webkit-appearance: none;
+      text-align: center;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      outline: 0;
+      margin-left: 30px;
+      -webkit-transition: .1s;
+      transition: .1s;
+      font-weight: 500;
+      padding: 12px 20px;
+      font-size: 14px;
+      border-radius: 4px;
+      background: #f0f9eb;
+      border-color: #c2e7b0;
+    }
+  .suv:hover {
+    background-color: #67C23A;
     color: #FFFFFF;
   }
+
+
+    .file {
+      @media screen and (max-width:1000px) {
+        width: 73px;
+      }
+    }
+  .box {
+      width: 100%;
+      display: flex;
+      padding: 10px;
+      box-sizing: border-box;
+        @media screen and (max-width:1000px){
+          width: 100%;
+        }
+    }
+  .box>div:nth-child(1){
+      @media screen and (max-width:1000px){
+          width:70%;
+        }
+  }
+    .box>div:nth-child(2) {
+      width: 100%;
+      margin: auto;
+      @media screen and (max-width:1000px){
+          width:30%;
+          padding:0 5px;
+        }
+    }
+
+    .BoxItemimg {
+      @media screen and (max-width:1000px) {
+        height: 100px;
+      }
+      /* margin: auto; */
+      flex-direction: column;
+      /* justify-content: center; */
+      align-items: center
+    }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="shouye" v-if="logins">
+      <h1>学员信息录入系统</h1>
       <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="身份证账号">
           <el-input type="name" ref="name" placeholder="请输入身份证账号" v-model="ruleForm.name" autocomplete="off"></el-input>
@@ -10,7 +11,7 @@
           </el-input>
         </el-form-item>
         <el-form-item>
-          <div class="xiugai" @click="xiugai">忘记密码</div>
+          <div class="xiugai" ><span @click="xiugai">忘记密码</span> </div>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="login">提交</el-button>
@@ -20,6 +21,7 @@
     </div>
     <!-- 修改密码 -->
     <div id="shou" v-else="logins">
+      <h1>学员信息录入系统</h1>
       <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="身份证账号">
           <el-input type="name" ref="name" placeholder="请输入身份证账号" v-model="ruleForm.name" autocomplete="off"></el-input>
@@ -43,8 +45,8 @@
     name: 'index',
     data() {
       return {
-        url: 'http://localhost/xinxiPHP/',
-        // url:'http://xinxi.hd512.com/xinxiPHP/',
+        // url: 'http://localhost/xinxiPHP/',
+        url:'http://xinxi.hd512.com/xinxiPHP/',
         ruleForm: {
           name: '', //登录账号
           pass: '' //登录密码
@@ -135,16 +137,29 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  h1{
+    text-align: center;
+    margin-bottom:30px;
+    @media screen and (max-width:1000px){
+      font-size: 20px;
+      margin-bottom:30px;
+    }
+  }
   #shouye,
   #shou {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 30%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%);
+    transform: translate(-50%,-50%);
+    @media screen and (max-width:1000px){
+      padding: 10px;
+      box-sizing: border-box;
+      width: 100%;
+    }
   }
 
   #shouye .index,

@@ -5,30 +5,45 @@
       <div class="operationBoxItem">
         <div class="titleBox">
           学员信息录入
-          <el-button type="primary" @click='goback' style="margin-left: 20px;" >返回</el-button>
+          <el-button type="primary" @click='goback' style="margin-left: 20px;">返回</el-button>
         </div>
         <div class="BoxItem">
-          <div class="BoxItemList">
-            <label>姓名:</label>
-            <el-input v-model="row.name" name="name" style="width: 240px;"></el-input>
-            <label>性别:</label>
-            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-            <el-input v-model="row.sex" name="sex" style="width: 60px;"></el-input>
-            <label>年龄:</label>
-            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-            <el-input v-model="row.age" name="age" style="width: 60px;"></el-input>
-          </div>
-          <div class="BoxItemList">
-            <label>联系电话:</label>
-            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-            <el-input v-model="row.tel" name="tel" style="width: 240px;"></el-input>
-            <label>身份证:</label>
-            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
-            <el-input v-model="row.codes" name="codes" style="width: 240px;"></el-input>
+          <div class="box">
+            <div>
+              <div class="BoxItemList">
+                <label>姓名:</label>
+                <el-input v-model="row.name" name="name" style="width: 240px;"></el-input>
+              </div>
+              <div class="BoxItemList">
+                <label>性别:</label>
+                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+                <el-input v-model="row.sex" name="sex" style="width: 60px;"></el-input>
+                <label>年龄:</label>
+                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+                <el-input v-model="row.age" name="age" style="width: 60px;"></el-input>
+              </div>
+              <div class="BoxItemList">
+                <label>联系电话:</label>
+                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+                <el-input v-model="row.tel" name="tel" style="width: 240px;"></el-input>
+              </div>
+              <div class="BoxItemList">
+                <label>身份证:</label>
+                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
+                <el-input v-model="row.codes" name="codes" style="width: 240px;"></el-input>
+              </div>
+            </div>
+            <div>
+              <div class="BoxItemList BoxItemimg">
+                <input style="text-align: center;" class="file"   type="file" name="file" @change="tirggerFile($event)" />
+               <img class="imgs" v-if="imgUrl!=''" :src="imgUrl">
+                <p class="pp" :style="{'text-align': (imgUrl!=''? 'center':'')}" >注:请上传2寸或1存照片</p>
+              </div>
+            </div>
           </div>
           <div class="BoxItemList">
             <label>家庭住址:</label>
-            <el-input v-model="row.HomeAddress" name="HomeAddress" style="width: 90%;"></el-input>
+            <el-input class="address" v-model="row.HomeAddress" name="HomeAddress" style="width: 90%;"></el-input>
             <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.price}}</div> -->
           </div>
           <div class="BoxItemList">
@@ -88,13 +103,6 @@
           </div>
         </div>
       </div>
-      <div class="operationBoxItem" style="padding: 0 20px; ">
-        <div class="boxImg boxImgA">
-          <input type="file" name="file" @change="tirggerFile($event)" />
-          <img style="width: 140px; height: 160px;"  v-if="imgUrl!=''" :src="imgUrl">
-          <p class="pp">注:请上传2寸或1存照片</p>
-        </div>
-      </div>
     </form>
 
 
@@ -106,8 +114,8 @@
   export default {
     data() {
       return {
-        url: 'http://localhost/xinxiPHP/',
-        // url:'http://xinxi.hd512.com/xinxiPHP/',
+        // url: 'http://localhost/xinxiPHP/',
+        url:'http://xinxi.hd512.com/xinxiPHP/',
         imgUrl: '',
         files: {},
         photo: '',
@@ -164,176 +172,206 @@
         });
       },
       tirggerFile: function(event) {
-            let file = event.target.files[0];
-            // console.log(file.size)
-             // if(!file.size / 1024 / 1024 < 3){
-             //    alert('上传图片过大')
-             //    return false;
-             // }
-            let url = "";
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            let that = this;
-            reader.onload = function(e) {
-              url = this.result.substring(this.result.indexOf(",") + 1);
-              that.imgUrl = "data:image/png;base64," + url;
-              // that.$refs['imgimg'].setAttribute('src','data:image/png;base64,'+url);
-            };
-        }
+        let file = event.target.files[0];
+        // console.log(file.size)
+        // if(!file.size / 1024 / 1024 < 3){
+        //    alert('上传图片过大')
+        //    return false;
+        // }
+        let url = "";
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        let that = this;
+        reader.onload = function(e) {
+          url = this.result.substring(this.result.indexOf(",") + 1);
+          that.imgUrl = "data:image/png;base64," + url;
+          // that.$refs['imgimg'].setAttribute('src','data:image/png;base64,'+url);
+        };
+      }
     }
   };
 </script>
 
-<style>
-  .boxImg::-webkit-scrollbar {
-    width: 2px;
-    background: #eee;
-  }
+<style  lang="scss">
+  .imgs {
+      width: 140px;
+      height: 200px;
+      @media screen and (max-width:1000px){
+          width: 100%;
+          // height: 100%;
+        };
+    }
 
-  .BoxItemListDiv {
-    font-size: 16px;
-  }
+    .boxImg::-webkit-scrollbar {
+      width: 2px;
+      background: #eee;
+    }
 
-  .boxImg::-webkit-scrollbar-thumb {
-    background: #ccc;
-  }
+    .BoxItemListDiv {
+      font-size: 16px;
+    }
 
-  .boxImgA {
-    height: 120px;
-    overflow: hidden;
-    overflow-y: auto;
-  }
+    .boxImg::-webkit-scrollbar-thumb {
+      background: #ccc;
+    }
+    .boxImgA {
+      height: 120px;
+      overflow: hidden;
+      overflow-y: auto;
+    }
 
-  .boxImgC {
-    height: 195px;
-    overflow: hidden;
-    overflow-y: auto;
-  }
+    .boxImgC {
+      height: 195px;
+      overflow: hidden;
+      overflow-y: auto;
+    }
 
-  .boxImgC .el-upload--picture-card,
-  .boxImgC .el-upload-list--picture-card .el-upload-list__item,
-  .boxImgB .el-upload--picture-card,
-  .boxImgB .el-upload-list--picture-card .el-upload-list__item {
-    height: 180px !important;
-    line-height: 180px !important;
-  }
+    .boxImgC .el-upload--picture-card,
+    .boxImgC .el-upload-list--picture-card .el-upload-list__item,
+    .boxImgB .el-upload--picture-card,
+    .boxImgB .el-upload-list--picture-card .el-upload-list__item {
+      height: 180px !important;
+      line-height: 180px !important;
+    }
 
-  .boxImgA .el-upload--picture-card,
-  .boxImgA .el-upload-list--picture-card .el-upload-list__item {
-    height: 100px !important;
-    line-height: 100px !important;
-  }
+    .boxImgA .el-upload--picture-card,
+    .boxImgA .el-upload-list--picture-card .el-upload-list__item {
+      height: 100px !important;
+      line-height: 100px !important;
+    }
 
-  .el-upload--picture-card .el-upload__input {
-    display: none;
-  }
+    .el-upload--picture-card .el-upload__input {
+      display: none;
+    }
 
-  .boxImg {
-    width: 100%;
-  }
+    .boxImg {
+      width: 100%;
+    }
 
-  label {}
+    label {}
 
-  .lianxi {
-    width: 100px;
-    text-align: right;
-    font-size: 18px;
-  }
+    .lianxi {
+      width: 100px;
+      text-align: right;
+      font-size: 18px;
 
-  .BoxItemList label {
-    color: #000;
-    font-size: 18px;
-    margin-right: 20px;
-    width: 100px;
-    text-align: right;
-    /* text-align-last: justify;
-    text-align: justify;
-    text-justify: distribute-all-lines; */
-  }
+      @media screen and (max-width:1000px) {
+        font-size: 16px;
+        text-align: left;
+      }
+    }
 
-  .BoxItemList {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-  }
+    .BoxItemList label {
+      color: #000;
+      font-size: 18px;
+      margin-right: 20px;
+      width: 100px;
+      text-align: right;
 
-  .BoxItemList:last-child {
-    justify-content: center;
-  }
+      /* text-align-last: justify;
+      text-align: justify;
+      text-justify: distribute-all-lines; */
+      @media screen and (max-width:1000px) {
+        width: 20%;
+        font-size: 12px;
+        margin-right: 5px;
+      }
+    }
 
-  .operationBox {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
+    .BoxItemList {
+      width: 100%;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      @media screen and (max-width:1000px){
+          & label{
+            width:50px;
+            // width: 60px !important;
+          }
 
-  .operationBoxItem {
-    width: 48%;
-    height: 100%;
-    background: #fff;
-    margin: 0 20px;
-  }
+          &:nth-child(5) label,
+          &:nth-child(6) label{
+            width:100px;
+          }
+        };
+    }
 
-  .titleBox {
-    width: 100%;
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: 700;
-    color: #000;
-  }
+    .BoxItemList:last-child {
+      justify-content: center;
+    }
 
-  .BoxItem {
-    width: 100%;
-    height: calc(100% - 50px);
-    /* padding: 40px 0 0 20px ; */
-  }
+    .operationBox {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
 
-  .boxImg {
-    margin-top: 40px;
-    height: 100%;
-    display: flex;
-    /* align-items: center; */
-    flex-direction: column;
-  }
+    }
 
-  .pp {
-    color: #666;
-    font-size: 12px;
-  }
+    .operationBoxItem {
+      padding: 10px 30px;
+      box-sizing: border-box;
+      margin: auto;
+      width: 48%;
+      height: 100%;
+      background: #fff;
+border: 1px solid rgba(153, 153, 153, .3);
+      /* margin: 0 20px; */
+      @media screen and (max-width:1000px) {
+        width: 100%;
+        padding: 10px;
+      }
+    }
 
-  .disabled .el-upload--picture-card {
-    display: none;
-  }
+    .titleBox {
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #000;
 
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
+      @media screen and (max-width:1000px) {
+        box-sizing: border-box;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
 
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
+    .BoxItem {
+      width: 100%;
+      height: calc(100% - 50px);
+      /* padding: 40px 0 0 20px ; */
+    }
 
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
+    .boxImg {
+      margin-top: 40px;
+      /* width: 100px; */
+      height: 100%;
+      display: flex;
+      /* align-items: center; */
+      flex-direction: column;
+    }
 
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
-  .suv {
+    textarea:disabled,
+    input:disabled {
+      background-color: #FFFFFF !important;
+      color: #333333 !important;
+    }
+
+    .pp {
+      /* text-align: center; */
+      color: #666;
+      font-size: 12px;
+      width: 252px;
+      @media screen and (max-width:1000px){
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+          // width: 252px;
+      }
+    }
+.suv {
     display: inline-block;
     line-height: 1;
     white-space: nowrap;
@@ -352,11 +390,57 @@
     padding: 12px 20px;
     font-size: 14px;
     border-radius: 4px;
-        background: #f0f9eb;
-        border-color: #c2e7b0;
+    background: #f0f9eb;
+    border-color: #c2e7b0;
   }
-  .suv:hover{
-    background-color:#67C23A;
+
+  .suv:hover {
+    background-color: #67C23A;
     color: #FFFFFF;
   }
+  .file {
+      @media screen and (max-width:1000px) {
+        width: 73px;
+      }
+    }
+    .box {
+      width: 100%;
+      display: flex;
+      padding: 10px;
+      box-sizing: border-box;
+        @media screen and (max-width:1000px){
+          width: 100%;
+        }
+    }
+
+  .box>div:nth-child(1){
+      @media screen and (max-width:1000px){
+          width:70%;
+        }
+  }
+    .box>div:nth-child(2) {
+      width: 100%;
+      margin: auto;
+      @media screen and (max-width:1000px){
+          width:30%;
+        }
+    }
+.box>div:nth-child(1) .BoxItemList:nth-child(2){
+  @media screen and (max-width:1000px) {
+    // width: 100px;
+  }
+}
+    .BoxItemimg {
+      @media screen and (max-width:1000px) {
+        height: 100px;
+      }
+      /* margin: auto; */
+      flex-direction: column;
+      /* justify-content: center; */
+      align-items: center
+    }
+    // .address{
+    //   width: 90% !important;
+
+    // }
 </style>

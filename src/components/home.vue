@@ -25,7 +25,7 @@
     },
     mounted() {
 
-      if(sessionStorage.getItem("code")=='xinxiadmin'){
+      if(sessionStorage.getItem("code")=='huidait'){
           this.$router.push({name:'all'});
           this.deng()
       }else{

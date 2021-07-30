@@ -2,16 +2,20 @@
   <div class="man-box">
     <div class="man-box-h">
       <div class="man-box-h-l">
-        <div class="demo-input-suffix" style="color: #000;font-size: 18px;">学员信息查询
-          <el-input placeholder="请输入学员身份证或联系方式" @keyup.enter.native="input_phone_native" @blur="input_phone_blur"
-            v-model="input_phone" style="width: 300px;margin:0 20px;">
-          </el-input>
-          <el-button type="primary" icon="el-icon-search" @click="inquire_phone">搜索</el-button>
+        <div class="demo-input-suffix" style="color: #000;font-size: 18px;">
+          <span>学员信息查询</span>
+          <div>
+            <el-input class="inou" placeholder="请输入学员身份证或联系方式" @keyup.enter.native="input_phone_native"
+              @blur="input_phone_blur" v-model="input_phone">
+            </el-input>
+            <el-button class="btn" type="primary" icon="el-icon-search" @click="inquire_phone">搜索</el-button>
+          </div>
+
         </div>
       </div>
-      <div style="margin-right: 30px;" >
+      <div class="btns" style="margin-right: 30px;">
         <el-button type="danger" @click="addXinxi">录入信息</el-button>
-        <el-button type="success" @click="delll" >退出</el-button>
+        <el-button type="success" @click="delll">退出</el-button>
       </div>
     </div>
 
@@ -20,21 +24,21 @@
       <el-table :data="tableData.slice((currpage-1)*pagesize,currpage*pagesize)" style="width: 100%" class="tablebox">
         <el-table-column prop="name" label="姓名">
         </el-table-column>
-        <el-table-column prop="sex" label="性别" >
+        <el-table-column prop="sex" label="性别">
         </el-table-column>
-        <el-table-column prop="age" label="年龄" >
+        <el-table-column prop="age" label="年龄">
         </el-table-column>
         <el-table-column prop="tel" label="手机号">
         </el-table-column>
-        <el-table-column prop="codes" label="身份证" >
+        <el-table-column prop="codes" label="身份证">
         </el-table-column>
-        <el-table-column prop="major" label="所学专业" >
+        <el-table-column prop="major" label="所学专业">
         </el-table-column>
         <el-table-column prop="enrollment" label="入学时间">
         </el-table-column>
         <el-table-column prop="referrer" label="推荐人">
         </el-table-column>
-        <el-table-column fixed="right" label="操作" >
+        <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="success" size="small" plain>详情</el-button>
             <el-button @click="delClick(scope.row.id)" type="danger" size="small" plain>删除</el-button>
@@ -58,8 +62,8 @@
   export default {
     data() {
       return {
-        url: 'http://localhost/xinxiPHP/',
-        // url:'http://xinxi.hd512.com/xinxiPHP/',
+        // url: 'http://localhost/xinxiPHP/',
+        url:'http://xinxi.hd512.com/xinxiPHP/',
         input_phone: '', // 学员查询
         tableData: [],
         pagesize: 10, // 每页的数据条数
@@ -70,22 +74,22 @@
       };
     },
     methods: {
-      delll(){
+      delll() {
         sessionStorage.removeItem('code')
-      // 退出
-      this.$router.push({
-        name: 'index'
-      });
+        // 退出
+        this.$router.push({
+          name: 'index'
+        });
 
       },
       // 进去的时候判断是否有没有登录  请先登录
-      deng(){
-         if(!sessionStorage.getItem("code")){
-             alert('请先登录')
-               this.$router.push({
-                 name: 'index'
-               });
-         }
+      deng() {
+        if (!sessionStorage.getItem("code")) {
+          alert('请先登录')
+          this.$router.push({
+            name: 'index'
+          });
+        }
       },
       info() {
         this.$axios.get(this.url + 'info.php').then(res => {
@@ -173,11 +177,12 @@
   /* 	.man-content-table .el-table__body-wrapper .el-table_1_column_5 {
 		color: #EA4A3C;
 	} */
-  .ren{
+  .ren {
     font-size: 13px;
-        height: 28px;
-        line-height: 28px;
+    height: 28px;
+    line-height: 28px;
   }
+
   .tablebox th,
   .tablebox tr,
   .tablebox td {
@@ -187,6 +192,12 @@
   }
 </style>
 <style scoped lang="scss">
+  .btns {
+    @media screen and (max-width:1000px) {
+      text-align: center;
+    }
+  }
+
   .man-box {
     height: 100%;
     background-color: #fff;
@@ -200,10 +211,55 @@
     display: flex;
     justify-content: space-between;
 
+    @media screen and (max-width:1000px) {
+      width: 100%;
+      // height: 400px;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .demo-input-suffix {
+      display: flex;
+      align-items: center;
+
+      &>span {
+        @media screen and (max-width:1000px) {
+          margin-bottom: 20px;
+        }
+      }
+
+      &>div {
+        display: flex;
+        align-items: center;
+        &>.inou {
+          width: 300px;
+
+          @media screen and (max-width:1000px) {
+            width: 200px;
+          }
+        }
+      }
+
+      @media screen and (max-width:1000px) {
+        flex-direction: column;
+
+        // display: inline-block;
+      }
+    }
+
     .man-box-h-l {
       height: 50px;
       line-height: 50px;
       margin-left: 25px;
+
+      @media screen and (max-width:1000px) {
+        width: 100%;
+        height: 100px;
+        flex-direction: column;
+        margin-left: 0;
+      }
+
+      ;
 
       span {
         display: inline-block;
@@ -222,11 +278,30 @@
 
   }
 
+  .el-button+.el-button {
+    @media screen and (max-width:1000px) {
+      margin-left: 0;
+    }
+  }
+.el-button--primary{
+@media screen and (max-width:1000px) {
+      height: 40px;
+    }
+}
+// .el-input__inner{
+//       @media screen and (max-width:1000px) {
+//       height: 45px;
+//     }
+// }
   // 表格
 
   .man-content-table {
     padding-left: 25px;
     padding-right: 50px;
+
+    @media screen and (max-width:1000px) {
+      padding: 10px;
+    }
   }
 
   // 分页
@@ -244,10 +319,15 @@
   .el-pagination button {
     background-color: #DEE5E7;
   }
-  .man-content-pages{
+
+  .man-content-pages {
     padding-left: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media screen and (max-width:1000px) {
+      flex-direction: column;
+    }
   }
 </style>
