@@ -18,27 +18,16 @@
               <div class="BoxItemList">
                 <label>性别:</label>
                 <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-                <el-input :disabled="dis" v-model="row.sex" name="sex" style="width: 60px;"></el-input>
+                <el-input :disabled="dis" v-model="row.sex" name="sex" style="width: 240px;"></el-input>
+              </div>
+              <div class="BoxItemList">
                 <label>年龄:</label>
                 <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-                <el-input :disabled="dis" v-model="row.age" name="age" style="width: 60px;"></el-input>
-              </div>
-              <div class="BoxItemList">
-                <label>联系电话:</label>
-                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-                <el-input :disabled="dis" v-model="row.tel" name="tel" style="width: 240px;"></el-input>
-              </div>
-              <div class="BoxItemList">
-                <label>身份证:</label>
-                <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
-                <el-input :disabled="dis" v-model="row.codes" name="codes" style="width: 240px;"></el-input>
+                <el-input :disabled="dis" v-model="row.age" name="age" style="width: 240px;"></el-input>
               </div>
             </div>
             <div>
               <div class="BoxItemList BoxItemimg">
-                <!-- <input type="file" v-if="imgactive" name="file" @change="tirggerFile($event)" />
-                <img style="width: 140px; height: 160px;" v-if="row.img!=''" :src="row.img">
-                <p class="pp">注:请上传2寸或1存照片</p> -->
                 <input class="file" style="text-align: center;" v-if="imgactive" type="file" name="file"
                   @change="tirggerFile($event)" />
                 <img class="imgs" v-if="row.img!=''" :src="row.img">
@@ -47,19 +36,31 @@
             </div>
           </div>
           <div class="BoxItemList">
+            <label>联系电话:</label>
+            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+            <el-input :disabled="dis" v-model="row.tel" name="tel" style="width: 240px;"></el-input>
+          </div>
+          <div class="BoxItemList">
+            <label>身份证:</label>
+            <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
+            <el-input :disabled="dis" v-model="row.codes" name="codes" style="width: 240px;"></el-input>
+          </div>
+          <div class="BoxItemList">
             <label>家庭住址:</label>
-            <el-input :disabled="dis" name='HomeAddress' v-model="row.HomeAddress" style="width: 90%;"></el-input>
+            <el-input :disabled="dis" class="address"  name='HomeAddress' v-model="row.HomeAddress" ></el-input>
             <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.price}}</div> -->
           </div>
           <div class="BoxItemList">
             <label style="">现居地:</label>
-            <el-input :disabled="dis" name='newAddress' v-model="row.newAddress" style="width: 90%;"></el-input>
+            <el-input :disabled="dis" class="address" name='newAddress' v-model="row.newAddress"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="lianxi">联系人信息</div>
           <div class="BoxItemList">
             <label style="">父亲姓名:</label>
             <el-input :disabled="dis" name='fatherName' v-model="row.fatherName" style="width: 240px;"></el-input>
+          </div>
+          <div class="BoxItemList">
             <label style="">联系电话:</label>
             <el-input :disabled="dis" name='fatherTel' v-model="row.fatherTel" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
@@ -67,6 +68,8 @@
           <div class="BoxItemList">
             <label style="">母亲姓名:</label>
             <el-input :disabled="dis" name='motherName' v-model="row.motherName" style="width: 240px;"></el-input>
+          </div>
+          <div class="BoxItemList">
             <label style="">联系电话:</label>
             <el-input :disabled="dis" name='motherTel' v-model="row.motherTel" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
@@ -98,7 +101,7 @@
           </div>
           <div class="BoxItemList">
             <label style="">备注信息:</label>
-            <el-input :disabled="dis" name='remark' type="textarea" v-model="row.remark" style="width: 90%;"></el-input>
+            <el-input :disabled="dis" class="address" name='remark' type="textarea" v-model="row.remark"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
@@ -109,13 +112,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="operationBoxItem" style="padding: 0 20px; ">
-        <div class="boxImg boxImgA">
-          <input type="file" v-if="imgactive" name="file" @change="tirggerFile($event)" />
-          <img style="width: 140px; height: 160px;" v-if="row.img!=''" :src="row.img">
-          <p class="pp">注:请上传2寸或1存照片</p>
-        </div>
-      </div> -->
     </form>
   </div>
 </template>
@@ -169,6 +165,7 @@
         }
       },
       tirggerFile: function(event) {
+        this.imgactive=false
         let file = event.target.files[0];
         // console.log(file.size)
         // if(!file.size / 1024 / 1024 < 3){
@@ -183,6 +180,7 @@
           url = this.result.substring(this.result.indexOf(",") + 1);
           // that.imgUrl = "data:image/png;base64," + url;
           that.row.img = "data:image/png;base64," + url;
+          // this.imgactive = !this.imgactive
           // that.$refs['imgimg'].setAttribute('src','data:image/png;base64,'+url);
         };
       },
@@ -195,7 +193,7 @@
       },
       updateXinx() {
         this.dis = false
-        this.imgactive = !this.imgactive
+        this.imgactive = true
         this.row.img = ''
         for (var k in this.row) {
           if (this.row[k] == '无数据') {
@@ -224,14 +222,18 @@
 
 <style  lang="scss">
   .imgs {
-    width: 140px;
-    height: 200px;
-
+   width: 70px;
+   height: 100%;
     @media screen and (max-width:1000px) {
        width: 100%;
+         height: 100px;
     }
-
-    ;
+  }
+  .address{
+    width: 83%;
+       @media screen and (max-width:1000px){
+         width: 70%;
+    }
   }
 
   .boxImg::-webkit-scrollbar {
@@ -296,8 +298,8 @@
 
     @media screen and (max-width:1000px) {
       font-size: 16px;
-      text-align: left;
-      margin-left: 5px;
+      // text-align: left;
+      // margin-left: 5px;
     }
   }
 
@@ -312,7 +314,8 @@
         text-align: justify;
         text-justify: distribute-all-lines; */
     @media screen and (max-width:1000px) {
-      width: 20%;
+      // width: 20%;
+      text-align: center;
       font-size: 12px;
       margin-right: 5px;
     }
@@ -320,13 +323,14 @@
 
   .BoxItemList {
     width: 100%;
-    height: 60px;
+    // height: 60px;
+     margin-bottom: 10px;
     display: flex;
     align-items: center;
 
     @media screen and (max-width:1000px) {
       & label {
-        width: 50px;
+        // width: 50px;
         // width: 60px !important;
       }
 
@@ -336,7 +340,7 @@
 
       &:nth-child(5) label,
       &:nth-child(6) label {
-        width: 50px;
+        // width: 50px;
       }
     }
   }
@@ -360,11 +364,11 @@
     width: 48%;
     height: 100%;
     background: #fff;
-
+border: 1px solid rgba(153, 153, 153, .3);
     /* margin: 0 20px; */
     @media screen and (max-width:1000px) {
       width: 100%;
-      padding: 0;
+      padding: 10px;
     }
   }
 
@@ -453,7 +457,7 @@
   .box {
       width: 100%;
       display: flex;
-      padding: 10px;
+      // padding: 10px;
       box-sizing: border-box;
         @media screen and (max-width:1000px){
           width: 100%;
@@ -461,7 +465,12 @@
     }
   .box>div:nth-child(1){
       @media screen and (max-width:1000px){
-          width:70%;
+          width:60%;
+        }
+  }
+  .box>div:nth-child(1) label{
+      @media screen and (max-width:1000px){
+          width:240px;
         }
   }
     .box>div:nth-child(2) {
@@ -470,6 +479,8 @@
       @media screen and (max-width:1000px){
           width:30%;
           padding:0 5px;
+          padding-top: 20px;
+          box-sizing: border-box;
         }
     }
 

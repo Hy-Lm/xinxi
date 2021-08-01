@@ -9,89 +9,98 @@
         <div class="box">
           <div>
             <div class="BoxItemList">
-              <label>姓名:</label>
+              <label>姓名 :</label>
               <el-input :disabled="dis" v-model="row.name" name="name" style="width: 240px;"></el-input>
             </div>
             <div class="BoxItemList">
-              <label>性别:</label>
+              <label>性别 :</label>
               <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-              <el-input :disabled="dis" v-model="row.sex" name="sex" style="width: 60px;"></el-input>
-              <label>年龄:</label>
-              <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-              <el-input :disabled="dis" v-model="row.age" name="age" style="width: 60px;"></el-input>
+              <el-input :disabled="dis" v-model="row.sex" name="sex" style="width: 240px;"></el-input>
             </div>
             <div class="BoxItemList">
-              <label>联系电话:</label>
+              <label>年龄 :</label>
               <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-              <el-input :disabled="dis" v-model="row.tel" name="tel" style="width: 240px;"></el-input>
+              <el-input :disabled="dis" v-model="row.age" name="age" style="width: 240px;"></el-input>
             </div>
-            <div class="BoxItemList">
-              <label>身份证:</label>
-              <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
-              <el-input :disabled="dis" v-model="row.codes" name="codes" style="width: 240px;"></el-input>
-            </div>
+
           </div>
           <div>
             <div class="BoxItemList BoxItemimg">
               <!-- <input style="text-align: center;" type="file" name="file" @change="tirggerFile($event)" /> -->
-              <img class="imgs" v-if="row.img!=''" :src="row.img">
+              <img class="imgs"  :src="row.img">
               <p class="pp" :style="{'text-align': (row.img!=''? 'center':'')}">注:请上传2寸或1存照片</p>
             </div>
           </div>
         </div>
-        <div class="BoxItemList address">
-          <label>家庭住址:</label>
-          <el-input :disabled="dis" v-model="row.HomeAddress" style="width: 90%;"></el-input>
+        <div class="BoxItemList">
+          <label>联系电话 :</label>
+          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
+          <el-input :disabled="dis" v-model="row.tel" name="tel" style="width: 240px;"></el-input>
+        </div>
+        <div class="BoxItemList">
+          <label>身份证 :</label>
+          <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
+          <el-input :disabled="dis" v-model="row.codes" name="codes" style="width: 240px;"></el-input>
+        </div>
+        <div class="BoxItemList">
+          <label>家庭住址 :</label>
+          <el-input :disabled="dis" class="address" v-model="row.HomeAddress"></el-input>
           <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.price}}</div> -->
         </div>
         <div class="BoxItemList">
-          <label style="">现居地:</label>
-          <el-input :disabled="dis" v-model="row.newAddress" style="width: 90%;"></el-input>
+          <label style="">现居地 :</label>
+          <el-input :disabled="dis" class="address" v-model="row.newAddress"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
-        <div class="lianxi">联系人信息</div>
+        <div class="lianxi">联系人信息 </div>
         <div class="BoxItemList">
-          <label style="">父亲姓名:</label>
+          <label style="">父亲姓名 :</label>
           <el-input :disabled="dis" v-model="row.fatherName" style="width: 240px;"></el-input>
-          <label style="">联系电话:</label>
+          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+        </div>
+        <div class="BoxItemList">
+          <label style="">联系电话 :</label>
           <el-input :disabled="dis" v-model="row.fatherTel" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
-          <label style="">母亲姓名:</label>
+          <label style="">母亲姓名 :</label>
           <el-input :disabled="dis" v-model="row.motherName" style="width: 240px;"></el-input>
-          <label style="">联系电话:</label>
+          <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
+        </div>
+        <div class="BoxItemList">
+          <label style="">联系电话 :</label>
           <el-input :disabled="dis" v-model="row.motherTel" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
-          <label style="">学制:</label>
+          <label style="">学制 :</label>
           <el-input :disabled="dis" v-model="row.schooling" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
-          <label style="">入学时间:</label>
+          <label style="">入学时间 :</label>
           <el-input :disabled="dis" v-model="row.enrollment" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
-          <label style="">所学专业:</label>
+          <label style="">所学专业 :</label>
           <el-input :disabled="dis" v-model="row.major" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
-          <label style="">专业老师:</label>
+          <label style="">专业老师 :</label>
           <el-input :disabled="dis" v-model="row.majorTeacher" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
-          <label style="">推荐人:</label>
+          <label style="">推荐人 :</label>
           <el-input :disabled="dis" v-model="row.referrer" style="width: 240px;"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
         <div class="BoxItemList">
-          <label style="">备注信息:</label>
-          <el-input :disabled="dis" type="textarea" v-model="row.remark" style="width: 90%;"></el-input>
+          <label style="">备注信息 :</label>
+          <el-input :disabled="dis" class="address" type="textarea" v-model="row.remark"></el-input>
           <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
         </div>
       </div>
@@ -174,12 +183,12 @@
     border: none !important;
   }
   .imgs {
-    width: 140px;
-    height: 200px;
-    @media screen and (max-width:1000px){
-        width: 100%;
-        // height: 100%;
-      };
+   width: 70px;
+   height: 100%;
+    @media screen and (max-width:1000px) {
+       width: 100%;
+         height: 100px;
+    }
   }
 
   // #app{
@@ -187,6 +196,12 @@
   //     width: 100vw;
   //   }
   // }
+  .address{
+    width: 83%;
+       @media screen and (max-width:1000px){
+         width: 70%;
+    }
+  }
 
   .boxImg::-webkit-scrollbar {
     width: 2px;
@@ -233,6 +248,7 @@
 
   .boxImg {
     width: 100%;
+     height: 100%;
   }
 
   label {}
@@ -244,7 +260,7 @@
 
     @media screen and (max-width:1000px) {
       font-size: 16px;
-      text-align: left;
+      // text-align: left;
     }
   }
 
@@ -259,7 +275,8 @@
     text-align: justify;
     text-justify: distribute-all-lines; */
     @media screen and (max-width:1000px) {
-      width: 20%;
+      // width: 20%;
+      text-align: center;
       font-size: 12px;
       margin-right: 5px;
     }
@@ -272,7 +289,7 @@
     align-items: center;
     @media screen and (max-width:1000px){
         & label{
-          width:50px;
+          // width:50px;
           // width: 60px !important;
         }
         // &:nth-child(2) div{
@@ -280,7 +297,7 @@
         // }
         &:nth-child(5) label,
         &:nth-child(6) label{
-          width:100px;
+          // width:100px;
         }
       };
   }
@@ -318,6 +335,7 @@
     font-size: 20px;
     font-weight: 700;
     color: #000;
+    box-sizing: border-box;
 
     @media screen and (max-width:1000px) {
       box-sizing: border-box;
@@ -364,7 +382,7 @@
   .box {
     width: 100%;
     display: flex;
-    padding: 10px;
+    // padding: 10px;
     box-sizing: border-box;
       @media screen and (max-width:1000px){
         width: 100%;
@@ -372,15 +390,23 @@
   }
 .box>div:nth-child(1){
     @media screen and (max-width:1000px){
-        width:70%;
+        width:60%;
       }
 }
+  .box>div:nth-child(1) label{
+      @media screen and (max-width:1000px){
+          width:240px;
+        }
+  }
   .box>div:nth-child(2) {
     width: 100%;
+     height: 100%;
     margin: auto;
     @media screen and (max-width:1000px){
         width:30%;
         padding:0 5px;
+        padding-top: 20px;
+        box-sizing: border-box;
       }
   }
 
