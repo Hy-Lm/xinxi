@@ -1,7 +1,7 @@
 <template>
   <div id="shouye">
     <h1>学员信息录入系统</h1>
-    <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="40px" class="demo-ruleForm">
       <el-form-item label="账号">
         <el-input type="name" ref="name" placeholder="请输入身份证" v-model="ruleForm.name" autocomplete="off"></el-input>
       </el-form-item>
@@ -11,7 +11,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="bb">返回</el-button>
-        <el-button type="primary" @click='wanc'>提交</el-button>
+        <el-button type="primary" @click='wanc'>注册</el-button>
       </el-form-item>
     </el-form>
   </div>

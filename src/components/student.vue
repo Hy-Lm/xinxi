@@ -284,7 +284,8 @@
 
   .BoxItemList {
     width: 100%;
-    height: 60px;
+    // height: 60px;
+    margin-bottom: 5px;
     display: flex;
     align-items: center;
     @media screen and (max-width:1000px){

@@ -2,7 +2,7 @@
   <div>
     <div id="shouye" v-if="logins">
       <h1>学员信息录入系统</h1>
-      <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="40px" class="demo-ruleForm">
         <el-form-item label="账号">
           <el-input type="name" ref="name" placeholder="请输入账号" v-model="ruleForm.name" autocomplete="off"></el-input>
         </el-form-item>
@@ -14,7 +14,7 @@
           <div class="xiugai" ><span @click="xiugai">忘记密码</span> </div>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="login">提交</el-button>
+          <el-button type="primary" @click="login">登录</el-button>
           <el-button @click="zhuci">注册</el-button>
         </el-form-item>
       </el-form>
@@ -32,7 +32,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="bb">返回</el-button>
-          <el-button type="primary" @click='update'>重置</el-button>
+          <el-button type="primary" @click='update'>提交</el-button>
         </el-form-item>
       </el-form>
     </div>
