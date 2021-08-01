@@ -28,7 +28,7 @@
             <div class="BoxItemList BoxItemimg">
               <!-- <input style="text-align: center;" type="file" name="file" @change="tirggerFile($event)" /> -->
               <img class="imgs"  :src="row.img">
-              <p class="pp" :style="{'text-align': (row.img!=''? 'center':'')}">注:请上传2寸或1存照片</p>
+              <p class="pp" :style="{'text-align': (row.img!=''? 'center':'')}">注:请上传2寸或1寸照片</p>
             </div>
           </div>
         </div>

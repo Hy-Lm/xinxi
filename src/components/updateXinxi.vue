@@ -31,7 +31,7 @@
                 <input class="file" style="text-align: center;" v-if="imgactive" type="file" name="file"
                   @change="tirggerFile($event)" />
                 <img class="imgs" v-if="row.img!=''" :src="row.img">
-                <p class="pp" :style="{'text-align': (row.img!=''? 'center':'')}">注:请上传2寸或1存照片</p>
+                <p class="pp" :style="{'text-align': (row.img!=''? 'center':'')}">注:请上传2寸或1寸照片</p>
               </div>
             </div>
           </div>
@@ -167,6 +167,11 @@
       tirggerFile: function(event) {
         this.imgactive=false
         let file = event.target.files[0];
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if(!isLt2M){
+           alert('上传图片过大')
+           return false;
+        }
         // console.log(file.size)
         // if(!file.size / 1024 / 1024 < 3){
         //    alert('上传图片过大')

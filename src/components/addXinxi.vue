@@ -30,7 +30,7 @@
               <div class="BoxItemList BoxItemimg">
                 <input style="text-align: center;" class="file" v-if="imgUrl==''"   type="file" name="file" @change="tirggerFile($event)" />
                <img class="imgs" v-if="imgUrl!=''" :src="imgUrl">
-                <p class="pp" :style="{'text-align': (imgUrl!=''? 'center':'')}" >注:请上传2寸或1存照片</p>
+                <p class="pp" :style="{'text-align': (imgUrl!=''? 'center':'')}" >注:请上传2寸或1寸照片</p>
               </div>
             </div>
           </div>
@@ -181,10 +181,11 @@
       tirggerFile: function(event) {
         let file = event.target.files[0];
         // console.log(file.size)
-        // if(!file.size / 1024 / 1024 < 3){
-        //    alert('上传图片过大')
-        //    return false;
-        // }
+         const isLt2M = file.size / 1024 / 1024 < 2;
+        if(!isLt2M){
+           alert('上传图片过大')
+           return false;
+        }
         let url = "";
         var reader = new FileReader();
         reader.readAsDataURL(file);
