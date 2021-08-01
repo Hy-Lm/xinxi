@@ -194,7 +194,8 @@
 <style scoped lang="scss">
   .btns {
     @media screen and (max-width:1000px) {
-      text-align: center;
+      // text-align: center;
+      margin-left: 30px;
     }
   }
 

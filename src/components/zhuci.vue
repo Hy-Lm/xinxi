@@ -2,11 +2,11 @@
   <div id="shouye">
     <h1>学员信息录入系统</h1>
     <el-form :model="ruleForm" status-icon ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="身份证账号">
-        <el-input type="name" ref="name" placeholder="请输入身份证账号" v-model="ruleForm.name" autocomplete="off"></el-input>
+      <el-form-item label="账号">
+        <el-input type="name" ref="name" placeholder="请输入身份证" v-model="ruleForm.name" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="注册密码">
-        <el-input type="password" ref="pass" placeholder="请输入注册密码" v-model="ruleForm.pass" autocomplete="off">
+      <el-form-item label="密码">
+        <el-input type="password" ref="pass" placeholder="请输入登录密码" v-model="ruleForm.pass" autocomplete="off">
         </el-input>
       </el-form-item>
       <el-form-item>
