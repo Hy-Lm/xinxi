@@ -167,7 +167,7 @@
       tirggerFile: function(event) {
         this.imgactive=false
         let file = event.target.files[0];
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        const isLt2M = file.size / 1024 / 1024 < 3;
         if(!isLt2M){
            alert('上传图片过大')
            return false;
@@ -235,9 +235,9 @@
     }
   }
   .address{
-    width: 83%;
+    width: 83% !important;
        @media screen and (max-width:1000px){
-         width: 70%;
+         width: 70% !important;
     }
   }
 
@@ -475,7 +475,7 @@ border: 1px solid rgba(153, 153, 153, .3);
   }
   .box>div:nth-child(1) label{
       @media screen and (max-width:1000px){
-          width:240px;
+          width:200px;
         }
   }
     .box>div:nth-child(2) {

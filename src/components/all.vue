@@ -195,7 +195,7 @@
   .btns {
     @media screen and (max-width:1000px) {
       // text-align: center;
-      margin-left: 30px;
+      margin-left: 50px;
     }
   }
 

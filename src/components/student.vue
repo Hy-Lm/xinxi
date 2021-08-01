@@ -395,7 +395,7 @@
 }
   .box>div:nth-child(1) label{
       @media screen and (max-width:1000px){
-          width:240px;
+          width:200px;
         }
   }
   .box>div:nth-child(2) {
