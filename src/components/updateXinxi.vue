@@ -55,7 +55,7 @@
             <el-input :disabled="dis" class="address" name='newAddress' v-model="row.newAddress"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
-          <div class="lianxi">联系人信息</div>
+          <!-- <div class="lianxi">联系人信息</div> -->
           <div class="BoxItemList">
             <label style="">父亲姓名:</label>
             <el-input :disabled="dis" name='fatherName' v-model="row.fatherName" style="width: 240px;"></el-input>

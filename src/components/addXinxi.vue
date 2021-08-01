@@ -12,17 +12,17 @@
             <div>
               <div class="BoxItemList">
                 <label>姓名 :</label>
-                <el-input v-model="row.name" name="name" style="width: 240px;"></el-input>
+                <el-input v-model="row.name" placeholder="请输入姓名" name="name" style="width: 240px;"></el-input>
               </div>
               <div class="BoxItemList">
                 <label>性别 :</label>
                 <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-                <el-input v-model="row.sex" name="sex" style="width: 240px;"></el-input>
+                <el-input v-model="row.sex" placeholder="请输入性别" name="sex" style="width: 240px;"></el-input>
               </div>
               <div class="BoxItemList">
                 <label>年龄 :</label>
                 <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-                <el-input v-model="row.age" name="age" style="width: 240px;"></el-input>
+                <el-input v-model="row.age" placeholder="请输入年龄" name="age" style="width: 240px;"></el-input>
               </div>
 
             </div>
@@ -37,70 +37,70 @@
           <div class="BoxItemList">
             <label>联系电话 :</label>
             <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.serial}}</div> -->
-            <el-input v-model="row.tel" name="tel" style="width: 240px;"></el-input>
+            <el-input v-model="row.tel" placeholder="请输入联系电话" name="tel" style="width: 240px;"></el-input>
           </div>
           <div class="BoxItemList">
             <label>身份证 :</label>
             <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.designation}}</div> -->
-            <el-input v-model="row.codes" name="codes" style="width: 240px;"></el-input>
+            <el-input v-model="row.codes" placeholder="请输入身份证" name="codes" style="width: 240px;"></el-input>
           </div>
           <div class="BoxItemList">
             <label>家庭住址 :</label>
-            <el-input class="address" v-model="row.HomeAddress" name="HomeAddress" ></el-input>
+            <el-input class="address" placeholder="请输入家庭住址" v-model="row.HomeAddress" name="HomeAddress" ></el-input>
             <!-- <div class="BoxItemListDiv" v-if="!boxShow">{{row.price}}</div> -->
           </div>
           <div class="BoxItemList">
             <label style="">现居地 :</label>
-            <el-input class="address" v-model="row.newAddress" name="newAddress"></el-input>
+            <el-input class="address" placeholder="请输入现居地" v-model="row.newAddress" name="newAddress"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
-          <div class="lianxi">联系人信息</div>
+          <!-- <div class="lianxi">联系人信息</div> -->
           <div class="BoxItemList">
             <label style="">父亲姓名 :</label>
-            <el-input v-model="row.fatherName" name="fatherName" style="width: 240px;"></el-input>
+            <el-input v-model="row.fatherName" placeholder="请输入父亲姓名" name="fatherName" style="width: 240px;"></el-input>
           </div>
           <div class="BoxItemList">
             <label style="">联系电话 :</label>
-            <el-input v-model="row.fatherTel" name="fatherTel" style="width: 240px;"></el-input>
+            <el-input v-model="row.fatherTel" placeholder="请输入联系电话" name="fatherTel" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
             <label style="">母亲姓名 :</label>
-            <el-input v-model="row.motherName" name="motherName" style="width: 240px;"></el-input>
+            <el-input v-model="row.motherName" placeholder="请输入母亲姓名" name="motherName" style="width: 240px;"></el-input>
           </div>
           <div class="BoxItemList">
             <label style="">联系电话 :</label>
-            <el-input v-model="row.motherTel" name="motherTel" style="width: 240px;"></el-input>
+            <el-input v-model="row.motherTel"  placeholder="请输入联系电话" name="motherTel" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
             <label style="">学制 :</label>
-            <el-input v-model="row.schooling" name="schooling" style="width: 240px;"></el-input>
+            <el-input v-model="row.schooling" placeholder="请输入学制" name="schooling" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
             <label style="">入学时间 :</label>
-            <el-input v-model="row.enrollment" name="enrollment" style="width: 240px;"></el-input>
+            <el-input v-model="row.enrollment" placeholder="请输入学时间" name="enrollment" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
             <label style="">所学专业 :</label>
-            <el-input v-model="row.major" name="major" style="width: 240px;"></el-input>
+            <el-input v-model="row.major" placeholder="请输入所学专业" name="major" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
-            <label style="">专业老师 :</label>
-            <el-input v-model="row.majorTeacher" name="majorTeacher" style="width: 240px;"></el-input>
+            <label style=""> :</label>
+            <el-input v-model="row.majorTeacher" placeholder="请输入专业老师" name="majorTeacher" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
             <label style="">推荐人 :</label>
-            <el-input v-model="row.referrer" name="referrer" style="width: 240px;"></el-input>
+            <el-input v-model="row.referrer"  placeholder="请输入推荐人" name="referrer" style="width: 240px;"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
             <label style="">备注信息 :</label>
-            <el-input type="textarea" class="address" name="remark" v-model="row.remark"></el-input>
+            <el-input type="textarea" placeholder="请输入备注信息" class="address" name="remark" v-model="row.remark"></el-input>
             <!-- <div v-if="!boxShow" class="BoxItemListDiv">{{row.particulars}}</div> -->
           </div>
           <div class="BoxItemList">
