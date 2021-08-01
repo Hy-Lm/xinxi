@@ -62,8 +62,8 @@
   export default {
     data() {
       return {
-        // url: 'http://localhost/xinxiPHP/',
-        url:'http://xinxi.hd512.com/xinxiPHP/',
+        url: 'http://localhost/xinxiPHP/',
+        // url:'http://xinxi.hd512.com/xinxiPHP/',
         input_phone: '', // 学员查询
         tableData: [],
         pagesize: 10, // 每页的数据条数

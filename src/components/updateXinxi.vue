@@ -28,7 +28,7 @@
             </div>
             <div>
               <div class="BoxItemList BoxItemimg">
-                <input class="file" style="text-align: center;" v-if="imgactive" type="file" name="file"
+                <input class="file" style="text-align: center;" v-show="row.img==''" type="file" name="imgs"
                   @change="tirggerFile($event)" />
                 <img class="imgs" v-if="row.img!=''" :src="row.img">
                 <p class="pp" :style="{'text-align': (row.img!=''? 'center':'')}">注:请上传2寸或1寸照片</p>
@@ -121,8 +121,8 @@
   export default {
     data() {
       return {
-        // url: 'http://localhost/xinxiPHP/',
-        url:'http://xinxi.hd512.com/xinxiPHP/',
+        url: 'http://localhost/xinxiPHP/',
+        // url:'http://xinxi.hd512.com/xinxiPHP/',
         // boxShow:false,
         imgUrl: '',
         imgactive: false,
@@ -165,8 +165,9 @@
         }
       },
       tirggerFile: function(event) {
-        this.imgactive=false
+        this.imgactive=!this.imgactive
         let file = event.target.files[0];
+        // console.log(file)
         const isLt2M = file.size / 1024 / 1024 < 3;
         if(!isLt2M){
            alert('上传图片过大')

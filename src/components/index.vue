@@ -45,8 +45,8 @@
     name: 'index',
     data() {
       return {
-        // url: 'http://localhost/xinxiPHP/',
-        url:'http://xinxi.hd512.com/xinxiPHP/',
+        url: 'http://localhost/xinxiPHP/',
+        // url:'http://xinxi.hd512.com/xinxiPHP/',
         ruleForm: {
           name: '', //登录账号
           pass: '' //登录密码

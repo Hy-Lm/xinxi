@@ -28,7 +28,7 @@
             </div>
             <div>
               <div class="BoxItemList BoxItemimg">
-                <input style="text-align: center;" class="file" v-if="imgUrl==''"   type="file" name="file" @change="tirggerFile($event)" />
+                <input style="text-align: center;" class="file" v-show="imgUrl==''"   type="file" name="file" @change="tirggerFile($event)" />
                <img class="imgs" v-if="imgUrl!=''" :src="imgUrl">
                 <p class="pp" :style="{'text-align': (imgUrl!=''? 'center':'')}" >注:请上传2寸或1寸照片</p>
               </div>
@@ -121,8 +121,8 @@
   export default {
     data() {
       return {
-        // url: 'http://localhost/xinxiPHP/',
-        url:'http://xinxi.hd512.com/xinxiPHP/',
+        url: 'http://localhost/xinxiPHP/',
+        // url:'http://xinxi.hd512.com/xinxiPHP/',
         imgUrl: '',
         files: {},
         photo: '',
