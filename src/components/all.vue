@@ -53,7 +53,12 @@
 				<el-table-column fixed="right" label="操作" width="150">
 					<template slot-scope="scope">
 						<el-button @click="handleClick(scope.row)" type="success" size="small" plain>详情</el-button>
-						<el-button @click="delClick(scope.row.id)" type="danger" size="small" plain>删除</el-button>
+						<!-- <el-buttontype="danger" size="small" plain>删除</el-button> -->
+						<template>
+							<el-popconfirm title="这是一段内容确定删除吗？" @confirm="delClick(scope.row.id)">
+								<el-button slot="reference" type="danger" size="small" plain>删除</el-button>
+							</el-popconfirm>
+						</template>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -81,7 +86,7 @@
 	export default {
 		data() {
 			return {
-				width: "20%",
+				width: "260px",
 				dialogVisible: false,
 				// url: 'http:///localhost/xinxiPHP/',
 				url: 'http://xinxi.hd512.com/xinxiPHP/',
@@ -95,40 +100,24 @@
 			};
 		},
 		mounted() {
-			var system = {};
-			var p = navigator.platform;
-			console.log(p);
-			system.win = p.indexOf("Win") == 0;
-			system.mac = p.indexOf("Mac") == 0;
-			if (system.win || system.mac) { //如果是电脑
-				console.log('电脑')
-			} else { //如果是手机,
-				this.uploadShow = false
-				console.log('手机')
-			}
+
 
 
 		},
 		methods: {
 			handleClose() {
-				console.log(1)
+				this.dialogVisible = false
 			},
-			quedin(){
-				// sessionStorage.removeItem('code')
-				// // 退出
-				// this.$router.push({
-				// 	name: 'index'
-				// });
-				// this.dialogVisible=false
-			},
-			delll() {
-				this.dialogVisible=true
-         sessionStorage.removeItem('code')
+			quedin() {
+				sessionStorage.removeItem('code')
 				// 退出
 				this.$router.push({
 					name: 'index'
 				});
-				// this.dialogVisible=false
+				this.dialogVisible = false
+			},
+			delll() {
+				this.dialogVisible = true
 			},
 			// 进去的时候判断是否有没有登录  请先登录
 			deng() {
@@ -188,6 +177,8 @@
 			},
 			// 删除
 			delClick(index) {
+				
+				console.log(index)
 				this.$axios.get(this.url + 'del.php', {
 					params: {
 						id: index
@@ -195,10 +186,15 @@
 				}).then(res => {
 					console.log(res.data)
 					if (res.data == 'ok') {
-						alert('删除成功')
+						this.$message({
+							message: '删除成功',
+							type: 'success'
+						});
+						// alert('删除成功')
 						this.info()
 					} else {
-						alert('删除失败')
+						this.$message.error('删除失败');
+						
 					}
 				})
 			},
@@ -260,6 +256,7 @@
 		position: absolute;
 		top: 0;
 		left: 0px;
+		cursor: pointer;
 	}
 
 	.boxtit {

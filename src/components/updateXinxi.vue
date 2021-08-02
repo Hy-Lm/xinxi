@@ -170,7 +170,10 @@
         // console.log(file)
         const isLt2M = file.size / 1024 / 1024 < 3;
         if(!isLt2M){
-           alert('上传图片过大')
+		   this.$message({
+		   	message: '上传图片过大，请重新上传',
+		   	type: 'warning'
+		   });
            return false;
         }
         // console.log(file.size)

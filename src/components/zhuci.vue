@@ -39,12 +39,12 @@
       },
       wanc() {
         if (!this.ruleForm.name) {
-          alert('请输入账号')
+					this.$message('请输入账号');
           this.$refs.name.focus();
           return false;
         }
         if (!this.ruleForm.pass) {
-          alert('请输入密码')
+					this.$message('请输入密码');
           this.$refs.pass.focus();
           return false;
         }
@@ -56,14 +56,20 @@
         }).then(res => {
           console.log(res)
           if (res.data == 'ok') {
-            alert('注册成功，请登录')
+			this.$message({
+				message: '注册成功，请登录',
+				type: 'success'
+			});
             this.$router.push({
               name: 'index'
             });
             this.ruleForm.name = ''
             this.ruleForm.pass = ''
           } else {
-            alert('注册失败')
+			this.$message({
+				message: '注册失败',
+				type: 'warning'
+			})
           }
         })
       }
