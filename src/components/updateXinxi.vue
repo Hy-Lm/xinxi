@@ -238,7 +238,7 @@
   .address{
     width: 83% !important;
        @media screen and (max-width:1000px){
-         width: 70% !important;
+         width: 240px !important;
     }
   }
 
@@ -320,8 +320,8 @@
         text-align: justify;
         text-justify: distribute-all-lines; */
     @media screen and (max-width:1000px) {
-      // width: 20%;
-      text-align: center;
+      width: 70px;
+      text-align: right;
       font-size: 12px;
       margin-right: 5px;
     }
@@ -329,12 +329,13 @@
 
   .BoxItemList {
     width: 100%;
-    // height: 60px;
+    // height: 55px;
      margin-bottom: 10px;
     display: flex;
     align-items: center;
 
     @media screen and (max-width:1000px) {
+       height: 55px;
       & label {
         // width: 50px;
         // width: 60px !important;
@@ -439,7 +440,7 @@ border: 1px solid rgba(153, 153, 153, .3);
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       outline: 0;
-      margin-left: 30px;
+      margin-left: 5px;
       -webkit-transition: .1s;
       transition: .1s;
       font-weight: 500;
@@ -476,7 +477,7 @@ border: 1px solid rgba(153, 153, 153, .3);
   }
   .box>div:nth-child(1) label{
       @media screen and (max-width:1000px){
-          width:200px;
+          width:145px;
         }
   }
     .box>div:nth-child(2) {

@@ -114,16 +114,21 @@
 				console.log(1)
 			},
 			quedin(){
-				sessionStorage.removeItem('code')
+				// sessionStorage.removeItem('code')
+				// // 退出
+				// this.$router.push({
+				// 	name: 'index'
+				// });
+				// this.dialogVisible=false
+			},
+			delll() {
+				this.dialogVisible=true
+         sessionStorage.removeItem('code')
 				// 退出
 				this.$router.push({
 					name: 'index'
 				});
-				this.dialogVisible=false
-			},
-			delll() {
-				this.dialogVisible=true
-
+				// this.dialogVisible=false
 			},
 			// 进去的时候判断是否有没有登录  请先登录
 			deng() {
@@ -233,7 +238,7 @@
 		padding: 0;
 	}
 
-	.el-input__inner {
+	.boxinput .el-input__inner {
 		border-radius: 0;
 		border: none;
 	}

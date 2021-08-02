@@ -199,7 +199,7 @@
   .address{
     width: 83%;
        @media screen and (max-width:1000px){
-         width: 70%;
+         width: 240px;
     }
   }
 
@@ -275,8 +275,8 @@
     text-align: justify;
     text-justify: distribute-all-lines; */
     @media screen and (max-width:1000px) {
-      // width: 20%;
-      text-align: center;
+      width: 70px;
+      text-align: right;
       font-size: 12px;
       margin-right: 5px;
     }
@@ -285,10 +285,11 @@
   .BoxItemList {
     width: 100%;
     // height: 60px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     @media screen and (max-width:1000px){
+       height: 60px;
         & label{
           // width:50px;
           // width: 60px !important;
@@ -396,7 +397,7 @@
 }
   .box>div:nth-child(1) label{
       @media screen and (max-width:1000px){
-          width:200px;
+          width:145px;
         }
   }
   .box>div:nth-child(2) {
