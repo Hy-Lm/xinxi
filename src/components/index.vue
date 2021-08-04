@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div id="shouye" v-if="logins">
-			<h1>学员信息录入系统</h1>
+			<h1>辉达学员信息录入系统</h1>
 			<el-form :model="ruleForm" status-icon ref="ruleForm" label-width="40px" class="demo-ruleForm">
 				<el-form-item label="账号">
 					<el-input type="name" ref="name" placeholder="请输入账号" v-model="ruleForm.name" autocomplete="off">

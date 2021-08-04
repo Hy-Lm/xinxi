@@ -230,6 +230,10 @@
       },
       addList() {
         let row = this.row
+        if(this.row.img==""){
+        	this.$message('请上传图片');
+        	return false
+        }
         let data = new FormData();
         // data.append('imgs', row.img);
         for (var k in row) {
@@ -237,7 +241,10 @@
         }
         this.$axios.post(`${this.url}/addXinxi.php`, data)
           .then(res => {
-            console.log('res=>', res);
+            // console.log('res=>', res);
+            if(res.data=='ok'){
+              this.dialogVisible=true
+            }
           })
       },
       changeKey(file, fileList) {

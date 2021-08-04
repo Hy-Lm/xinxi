@@ -192,21 +192,23 @@
 				this.dialogVisible = false
 			},
 			addList(){
-				let row=this.row
-				console.log(this.row)
-				if(this.row.img==""){
-					this.$message('请上传图片');
-					return false
-				}
-				this.$axios.get(this.url + 'updateXx.php', {
-					params: {
-						row:row
-					}
-				}).then(res => {
-					if(res.data=="ok"){
-						this.dialogVisible=true
-					}
-				})
+          let row = this.row
+
+          // console.log(row.img.split('.'))
+          row.img='.'+row.img.split('.')[1]+'.'+row.img.split('.')[2]
+          // console.log(row)
+        let data = new FormData();
+        // data.append('imgs', row.img);
+        for (var k in row) {
+         data.append(k, row[k]);
+        }
+        this.$axios.post(`${this.url}/updateXx.php`, data)
+          .then(res => {
+            console.log(res)
+           if(res.data=='ok'){
+             this.dialogVisible=true
+           }
+          })
 			},
 			changeKey(file, fileList) {
 				this.certHideUpload = fileList.length >= this.certLimitCount
@@ -268,9 +270,9 @@
 			},
 			updateXinx() {
 				this.dis = false
-				this.elupload = true
+				// this.elupload = true
 				this.imgactive = true
-				this.row.img = ''
+				// this.row.img = ''
 				for (var k in this.row) {
 					if (this.row[k] == '无数据') {
 						this.row[k] = ''
@@ -278,6 +280,7 @@
 				}
 			},
 			info() {
+        console.log(this.$route.params.row.id)
 				this.$axios.get(this.url + 'xinxiid.php', {
 					params: {
 						id: this.$route.params.row.id
