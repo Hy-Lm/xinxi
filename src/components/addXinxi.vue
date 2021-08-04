@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<form class="operationBox" role="form" :action="this.url+'addXinxi.php'" method="post"
-			enctype="multipart/form-data">
+		<!-- <form class="operationBox" role="form" :action="this.url+'addXinxi.php'" method="post"
+			enctype="multipart/form-data"> -->
 			<div class="operationBoxItem">
 				<div class="titleBox">
 					学员信息录入
@@ -29,12 +29,21 @@
 							</div>
 
 						</div>
-						<div>
+						<div class="uploadBox">
 							<div class="BoxItemList BoxItemimg">
-								<input style="text-align: center;" class="file" v-show="imgUrl==''" type="file"
-									name="file" @change="tirggerFile($event)" />
-								<img class="imgs" v-if="imgUrl!=''" :src="imgUrl">
-								<p class="pp" :style="{'text-align': (imgUrl!=''? 'center':'')}">注:请上传2寸或1寸照片</p>
+								<el-upload action="none" 
+								list-type="picture-card" 
+								:auto-upload="false" 
+								:limit="numberZhan"
+									:file-list="advertisement" 
+									:on-exceed="exceedFile"
+									:on-change="changeKey"
+									:class="{hide:certHideUpload}">
+									<i slot="default" class="el-icon-plus"></i>
+									<div slot="file" slot-scope="{file}">
+										<img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
+									</div>
+								</el-upload>
 							</div>
 						</div>
 					</div>
@@ -123,25 +132,37 @@
 					<div class="BoxItemList">
 						<!-- <label style="">库存详情</label> -->
 						<!-- <el-button type="success" plain @click="addFen">录入</el-button> -->
-						<input type="submit" class="suv" id="" value="录入" name="" />
+						<input type="submit" class="suv" id="" value="录入" name="" @click="addList" />
 					</div>
 				</div>
 			</div>
-		</form>
-
+		<!-- </form> -->
+		<el-dialog title="录入成功" :visible.sync="dialogVisible" :width="width" :before-close="handleClose">
+			<span slot="footer" class="dialog-footer" >
+				<el-button @click="addListBox">再次录入</el-button>
+				<el-button type="primary" @click='goback'>返回</el-button>
+			</span>
+		</el-dialog>
 
 	</div>
 </template>
 
 <script>
 	//
+	import Qs from 'qs' 
 	export default {
 		data() {
 			return {
+				width:"300px",
+				dialogVisible:false,
+				certHideUpload: false,
+				certLimitCount: 1,
+				showaddImg:true,
+				disabled: false,
+				advertisement:[],//保存的图片
 				// url: 'http://localhost/xinxiPHP/',
 				url: 'http://xinxi.hd512.com/xinxiPHP/',
 				imgUrl: '',
-				files: {},
 				photo: '',
 				photoObj: '',
 				// boxShow:false,
@@ -163,13 +184,12 @@
 					majorTeacher: '',
 					referrer: '',
 					remark: '',
-					img: ''
+					img:''
 				},
 				titleBoxitem: "",
 				number: 3,
 				numberZhan: 1,
 				dialogImageUrl: '',
-				dialogVisible: false,
 				disabled: false,
 				show: true,
 				formLabelWidth: '120px',
@@ -188,6 +208,62 @@
 			// this.deng()
 		},
 		methods: {
+			addListBox(){//再次录入
+				this.dialogVisible = false
+				this.row={
+					name: '',
+					sex: '',
+					age: '',
+					codes: '',
+					tel: '',
+					HomeAddress: '',
+					newAddress: '',
+					fatherName: '',
+					fatherTel: '',
+					motherName: '',
+					motherTel: '',
+					schooling: '',
+					enrollment: '',
+					major: '',
+					majorTeacher: '',
+					referrer: '',
+					remark: '',
+					img:''
+				}
+				this.advertisement=[]
+				this.certHideUpload=false
+			},
+			handleClose() {
+				this.dialogVisible = false
+			},
+			addList(){
+				let row=this.row
+				console.log(this.row)
+				this.$axios.get(this.url + 'addXinxi.php', {
+					params: {
+						row:row
+					}
+				}).then(res => {
+					// console.log(res.data)
+					if(res.data=="ok"){
+						this.dialogVisible=true
+					}
+				})
+			},
+			changeKey(file, fileList) {
+				this.certHideUpload = fileList.length >= this.certLimitCount
+				let that=this
+				console.log(file.raw, fileList)
+				// 转码
+				var reader = new FileReader();
+				    reader.readAsDataURL(file.raw);
+				    reader.onload = function(e){
+						that.row.img=this.result
+				    }
+			},
+			exceedFile(files, fileList) {
+				this.$message.error('只能上传' + this.numberZhan + '个文件');
+			},
 			goback() {
 				// console.log(this.$route.params.row.codes)
 				//返回首页
@@ -222,6 +298,25 @@
 </script>
 
 <style lang="scss">
+	.el-dialog__body{
+		padding: 0;
+	}
+	.hide .el-upload--picture-card {
+		display: none;
+	}
+	.el-upload-list__item,
+	.el-upload--picture-card{
+		width: 116px !important; 
+		height: 170px !important;
+		line-height: 170px !important;
+	}
+	.uploadBox{
+		position: relative;
+	}
+	.BoxItemimg{
+		position: absolute;
+		top:-44px;
+	}
 	// .el-input__inner{}
 	.imgs {
 		width: 70px;
@@ -237,7 +332,7 @@
 	}
 
 	.address {
-		width: 83% !important;
+		width: 72% !important;
 
 		@media screen and (max-width:1000px) {
 			width: 240px !important;
@@ -477,7 +572,7 @@
 
 	.box>div:nth-child(1) label {
 		@media screen and (max-width:1000px) {
-			width: 145px;
+			width: 102px;
 		}
 	}
 

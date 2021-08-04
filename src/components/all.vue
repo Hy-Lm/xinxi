@@ -88,7 +88,7 @@
 			return {
 				width: "260px",
 				dialogVisible: false,
-				// url: 'http:///localhost/xinxiPHP/',
+				// url: 'http://localhost/xinxiPHP/',
 				url: 'http://xinxi.hd512.com/xinxiPHP/',
 				input_phone: '', // 学员查询
 				tableData: [],
@@ -130,7 +130,7 @@
 			},
 			info() {
 				this.$axios.get(this.url + 'info.php').then(res => {
-					// console.log(res.data)
+					console.log(res.data)
 					this.tableData = res.data
 				})
 			},
@@ -222,6 +222,7 @@
 		width: calc(100vw - 40px);
 		padding: 0 20px;
 		overflow: hidden;
+		box-sizing: border-box;
 	}
 
 	.dixi {
