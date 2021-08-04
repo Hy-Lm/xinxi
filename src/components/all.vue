@@ -177,7 +177,7 @@
 			},
 			// 删除
 			delClick(index) {
-				
+
 				console.log(index)
 				this.$axios.get(this.url + 'del.php', {
 					params: {
@@ -194,7 +194,7 @@
 						this.info()
 					} else {
 						this.$message.error('删除失败');
-						
+
 					}
 				})
 			},
