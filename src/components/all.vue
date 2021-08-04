@@ -66,6 +66,7 @@
 			<div class="man-content-pages">
 				<div class="dixi">
 					<el-button type="success" @click="addXinxi">录入信息</el-button>
+					<el-button type="primary" @click="excel"><a style="color:#fff; text-decoration: none;" href="http://xinxi.hd512.com/xinxiPHP/xsl.php" download>导出信息</a></el-button>
 					<div class="ren">总人数 : {{tableData.length}}人</div>
 				</div>
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
@@ -99,12 +100,14 @@
 				details: [{}], //详情时看到的数据
 			};
 		},
-		mounted() {
-
-
-
-		},
 		methods: {
+			// excel(){
+			// 	// this.$axios.get(this.url + 'xsl.php')
+			// 	// .then(res => {
+					
+			// 	// 	console.log(res.data)
+			// 	// })
+			// },
 			handleClose() {
 				this.dialogVisible = false
 			},
@@ -122,7 +125,7 @@
 			// 进去的时候判断是否有没有登录  请先登录
 			deng() {
 				if (!sessionStorage.getItem("code")) {
-					alert('请先登录')
+					this.$message('请先登录');
 					this.$router.push({
 						name: 'index'
 					});
@@ -144,7 +147,7 @@
 			// 手机号查询
 			inquire_phone() {
 				if (this.input_phone == '') {
-					alert('请输入查询条件')
+					this.$message('请输入查询条件');
 					return false;
 				}
 				// console.log(this.input_phone);
