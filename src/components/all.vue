@@ -206,7 +206,7 @@
 						});
 						// alert('删除成功')
              this.tableData=this.tableData.filter(item=>item.id!=index)
-						this.info()
+						// this.info()
 					} else {
 						this.$message.error('删除失败');
 
