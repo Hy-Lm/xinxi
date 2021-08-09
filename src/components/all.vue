@@ -13,7 +13,7 @@
 			<!-- <div class="allH5TltBox" @click="delll">
 				<i class="el-icon-arrow-left"></i>
 			</div> -->
-		</div> 
+		</div>
 		<div class="boxList" v-if="showBoxText">
 			<div>
 				<el-button type="success" @click="addXinxi">录入信息</el-button>
@@ -48,11 +48,11 @@
 		<div class="h5_table">
 			<el-table :data="tableData.slice((currpage-1)*pagesize,currpage*pagesize)" style="width: 100%"
 				class="tablebox">
-				<el-table-column prop="name" label="姓名">
+				<el-table-column width="80;" prop="name" label="姓名">
 				</el-table-column>
-				<el-table-column prop="sex" label="性别">
+				<el-table-column width="60;" prop="sex" label="性别">
 				</el-table-column>
-				<el-table-column prop="age" label="年龄">
+				<el-table-column width="60;" prop="age" label="年龄">
 				</el-table-column>
 				<el-table-column prop="tel" label="手机号">
 				</el-table-column>
@@ -100,8 +100,8 @@
 				showBoxText:true,
 				width: "260px",
 				dialogVisible: false,
-				url: 'http://localhost/xinxiPHP/',
-				// url: 'http://xinxi.hd512.com/xinxiPHP/',
+				// url: 'http://localhost/xinxiPHP/',
+				url: 'http://xinxi.hd512.com/xinxiPHP/',
 				input_phone: '', // 学员查询
 				tableData: [],
 				pagesize: 10, // 每页的数据条数
@@ -162,7 +162,7 @@
 				if (this.input_phone == '') {
 					this.$message('请输入查询条件');
 					return false;
-				} 
+				}
 				// console.log(this.input_phone);
 				this.$axios.get(this.url + 'search.php', {
 					params: {
@@ -257,7 +257,7 @@
 		display: flex;
 	}
 .boxinput .el-input__inner{
-	border: 1px solid #fff !important; 
+	border: 1px solid #fff !important;
 }
 	.h5_table {
 		width: calc(100% - 22px);
