@@ -1,37 +1,51 @@
 <template>
-	<div class="man-box">
-		<div class="man-box-h">
-			<div class="boxtit">北京辉达IT教育学员信息
-				<div class="tui" @click="delll">
-					返回
-				</div>
+	<div class="allH5">
+		<!-- 模态框 -->
+		<div class="dialogss">
+			<el-dialog title="您确定要退出么?" :visible.sync="dialogVisible" :width="width" :before-close="handleClose">
+				<span slot="footer" class="dialog-footer">
+					<el-button type="primary" @click="quedin">确 定</el-button>
+				</span>
+			</el-dialog>
+		</div>
+		<div class="allH5Tlt">
+			北京辉达IT教育学员信息
+			<!-- <div class="allH5TltBox" @click="delll">
+				<i class="el-icon-arrow-left"></i>
+			</div> -->
+		</div> 
+		<div class="boxList" v-if="showBoxText">
+			<div>
+				<el-button type="success" @click="addXinxi">录入信息</el-button>
+				<el-button type="primary"><a style="color:#fff; text-decoration: none;"
+						href="http://xinxi.hd512.com/xinxiPHP/xsl.php" download>导出信息</a></el-button>
+				<el-button type="danger" @click="delll">退出</el-button>
 			</div>
+			<div class="boxinput" style="margin-left: 20px;">
+				<el-input style="width:250px;" class="inou" placeholder="请输入学员身份证或联系方式"
+					@keyup.enter.native="input_phone_native" @blur="input_phone_blur" v-model="input_phone">
+				</el-input>
+				<el-button class="btn" type="primary" icon="el-icon-search" @click="inquire_phone">搜索</el-button>
+			</div>
+		</div>
+		<div v-if="!showBoxText" style="display: flex; justify-content: center;">
+			<div>
+				<el-button type="success" @click="addXinxi">录入信息</el-button>
+				<el-button type="primary"><a style="color:#fff; text-decoration: none;"
+						href="http://xinxi.hd512.com/xinxiPHP/xsl.php" download>导出信息</a></el-button>
+				<el-button type="danger" @click="delll">退出</el-button>
+			</div>
+		</div>
+		<div v-if="!showBoxText" style="display: flex; justify-content: center; margin: 10px 0;">
 			<div class="boxinput">
 				<el-input style="width:250px;" class="inou" placeholder="请输入学员身份证或联系方式"
 					@keyup.enter.native="input_phone_native" @blur="input_phone_blur" v-model="input_phone">
 				</el-input>
 				<el-button class="btn" type="primary" icon="el-icon-search" @click="inquire_phone">搜索</el-button>
 			</div>
-			<!-- <div class="man-box-h-l">
-        <div class="demo-input-suffix" style="color: #000;font-size: 18px;">
-          <span>学员信息查询</span>
-          <div>
-            <el-input class="inou" placeholder="请输入学员身份证或联系方式" @keyup.enter.native="input_phone_native"
-              @blur="input_phone_blur" v-model="input_phone">
-            </el-input>
-            <el-button class="btn" type="primary" icon="el-icon-search" @click="inquire_phone">搜索</el-button>
-          </div>
-
-        </div>
-      </div>
-      <div class="btns" style="margin-right: 30px;">
-        <el-button type="danger" @click="addXinxi">录入信息</el-button>
-        <el-button type="success" @click="delll">退出</el-button>
-      </div> -->
 		</div>
-
 		<!-- 表格 -->
-		<div class="man-content-table">
+		<div class="h5_table">
 			<el-table :data="tableData.slice((currpage-1)*pagesize,currpage*pagesize)" style="width: 100%"
 				class="tablebox">
 				<el-table-column prop="name" label="姓名">
@@ -42,7 +56,7 @@
 				</el-table-column>
 				<el-table-column prop="tel" label="手机号">
 				</el-table-column>
-				<el-table-column prop="codes" label="身份证" width="200">
+				<el-table-column prop="codes" label="身份证号" width="200">
 				</el-table-column>
 				<el-table-column prop="major" label="所学专业">
 				</el-table-column>
@@ -55,31 +69,27 @@
 						<el-button @click="handleClick(scope.row)" type="success" size="small" plain>详情</el-button>
 						<!-- <el-buttontype="danger" size="small" plain>删除</el-button> -->
 						<template>
-							<el-popconfirm title="这是一段内容确定删除吗？" @confirm="delClick(scope.row.id)">
+							<el-popconfirm title="你确定要删除这个学生的信息么？" @confirm="delClick(scope.row.id)">
 								<el-button slot="reference" type="danger" size="small" plain>删除</el-button>
 							</el-popconfirm>
 						</template>
 					</template>
 				</el-table-column>
-			</el-table>
-			<!-- 分页 -->
-			<div class="man-content-pages">
-				<div class="dixi">
-					<el-button type="success" @click="addXinxi">录入信息</el-button>
-					<el-button type="primary" @click="excel"><a style="color:#fff; text-decoration: none;" href="http://xinxi.hd512.com/xinxiPHP/xsl.php" download>导出信息</a></el-button>
-					<div class="ren">总人数 : {{tableData.length}}人</div>
+				<div slot="append" v-if="tableData.length>0">
+					<div class='sum_footer' ref='sum_heji'>
+						<div style="width: 80px; padding: 0 10px;">总人数</div>
+						<div style="width: 100px; text-align: center;">{{tableData.length}} 人</div>
+					</div>
 				</div>
+			</el-table>
+
+			<div class="man-content-pages">
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
 					:current-page.sync="currpage" :page-size="pagesize" layout="total, prev, pager, next, jumper"
 					:total="tableData.length">
 				</el-pagination>
 			</div>
 		</div>
-		<el-dialog title="您确定要退出么?" :visible.sync="dialogVisible" :width="width" :before-close="handleClose">
-			<span slot="footer" class="dialog-footer">
-				<el-button type="primary" @click="quedin">确 定</el-button>
-			</span>
-		</el-dialog>
 	</div>
 </template>
 
@@ -87,10 +97,11 @@
 	export default {
 		data() {
 			return {
+				showBoxText:true,
 				width: "260px",
 				dialogVisible: false,
-				// url: 'http://localhost/xinxiPHP/',
-				url: 'http://xinxi.hd512.com/xinxiPHP/',
+				url: 'http://localhost/xinxiPHP/',
+				// url: 'http://xinxi.hd512.com/xinxiPHP/',
 				input_phone: '', // 学员查询
 				tableData: [],
 				pagesize: 10, // 每页的数据条数
@@ -104,10 +115,11 @@
 			// excel(){
 			// 	// this.$axios.get(this.url + 'xsl.php')
 			// 	// .then(res => {
-					
+
 			// 	// 	console.log(res.data)
 			// 	// })
 			// },
+
 			handleClose() {
 				this.dialogVisible = false
 			},
@@ -120,6 +132,7 @@
 				this.dialogVisible = false
 			},
 			delll() {
+				console.log(1)
 				this.dialogVisible = true
 			},
 			// 进去的时候判断是否有没有登录  请先登录
@@ -215,224 +228,93 @@
 		mounted() {
 			this.info()
 			this.deng()
+			this.flag = navigator.userAgent.match(
+				/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+			);
+			console.log(this.flag);
+			if (this.flag === null) {
+				console.log("pc端");
+				this.showBoxText=true
+			} else {
+				console.log("移动端");
+				this.showBoxText=false
+			}
 		}
 	}
 </script>
 
-<style>
-	.man-box {
-		margin-top: 20px;
-		width: calc(100vw - 40px);
-		padding: 0 20px;
-		overflow: hidden;
-		box-sizing: border-box;
-	}
-
-	.dixi {
+<style scoped>
+	.man-content-pages {
 		display: flex;
+		justify-content: center;
+		height: 60px;
 		align-items: center;
 	}
 
-	/* 搜索框 */
+	.sum_footer {
+		height: 70px;
+		line-height: 70px;
+		display: flex;
+	}
+.boxinput .el-input__inner{
+	border: 1px solid #fff !important; 
+}
+	.h5_table {
+		width: calc(100% - 22px);
+		padding-left: 20px;
+	}
+
+	.allH5 .boxinput .el-button {
+		border-radius: 0;
+	}
+
+	.allH5 .boxinput .el-input__inner {
+		border: none;
+	}
+
+	.boxList {
+		width: calc(100% - 40px);
+		padding: 0 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+
+	.allH5 .boxinput {
+		width: 300px;
+		align-self:center;
+		height: 36px;
+		border: 1px solid #409EFF;
+		display: flex;
+		border-radius: 5px;
+		overflow: hidden;
+	}
+
+
 	.el-dialog__body {
 		padding: 0;
 	}
 
-	.boxinput .el-input__inner {
-		border-radius: 0;
-		border: none;
-	}
-
-	.boxinput {
-		/* padding-left: 35px; */
-		background: #409EFF;
-		width: 350px;
-		border-radius: 10px;
+	.allH5 {
+		width: 100%;
+		/* border: 1px solid #f00; */
 		overflow: hidden;
-		border: 1px solid #409EFF;
-		height: 40px;
-
 	}
 
-	/* 表格头部 */
-	.tui {
-		font-size: 16px;
-		position: absolute;
-		top: 0;
-		left: 0px;
-		cursor: pointer;
-	}
-
-	.boxtit {
-		position: relative;
-		font-size: 20px;
-		font-weight: 700px;
-		width: calc(100vw - 20px);
-		text-align: center;
-		margin-bottom: 20px;
-		line-height: 34px;
-	}
-
-	/* 表格 */
-	/* 	.man-content-table .el-table__body-wrapper .el-table_1_column_5 {
-		color: #EA4A3C;
-	} */
-	.ren {
-		font-size: 13px;
-		height: 28px;
-		line-height: 28px;
-		margin-left: 20px;
-	}
-
-	.tablebox th,
-	.tablebox tr,
-	.tablebox td {
-		/* padding: 0 !important; */
-		height: 48px;
-		line-height: 48px !important;
-	}
-</style>
-<style scoped lang="scss">
-	.btns {
-		@media screen and (max-width:1000px) {
-			// text-align: center;
-			margin-left: 30px;
-		}
-	}
-
-	.man-box {
-		height: 100%;
-		background-color: #fff;
-	}
-
-	.man-box-h {
-		// padding: 10px 0;
-		// overflow: hidden;
-		// padding-right: 50px;
-		// box-sizing: border-box;
-		// display: flex;
-		// justify-content: space-between;
-
-		@media screen and (max-width:1000px) {
-			width: 100%;
-			// height: 400px;
-			flex-direction: column;
-			// padding: 10px;
-		}
-
-		.demo-input-suffix {
-			display: flex;
-			align-items: center;
-
-			&>span {
-				@media screen and (max-width:1000px) {
-					margin-bottom: 20px;
-				}
-			}
-
-			&>div {
-				display: flex;
-				align-items: center;
-
-				&>.inou {
-					width: 300px;
-
-					@media screen and (max-width:1000px) {
-						width: 200px;
-					}
-				}
-			}
-
-			@media screen and (max-width:1000px) {
-				flex-direction: column;
-
-				// display: inline-block;
-			}
-		}
-
-		.man-box-h-l {
-			height: 50px;
-			line-height: 50px;
-			margin-left: 25px;
-
-			@media screen and (max-width:1000px) {
-				width: 100%;
-				height: 100px;
-				flex-direction: column;
-				margin-left: 0;
-			}
-
-			;
-
-			span {
-				display: inline-block;
-				float: left;
-				width: auto;
-				height: 25px;
-				line-height: 25px;
-				opacity: 1;
-				font-size: 18px;
-				color: #363636;
-				margin-right: 17px;
-				vertical-align: middle;
-			}
-
-		}
-
-	}
-
-	.el-button+.el-button {
-		@media screen and (max-width:1000px) {
-			margin-left: 0;
-		}
-	}
-
-	.el-button--primary {
-		@media screen and (max-width:1000px) {
-			height: 40px;
-		}
-	}
-
-	// .el-input__inner{
-	//       @media screen and (max-width:1000px) {
-	//       height: 45px;
-	//     }
-	// }
-	// 表格
-
-	.man-content-table {
-		// padding-left: 25px;
-		// padding-right: 50px;
-
-		@media screen and (max-width:1000px) {
-			// padding: 10px;
-		}
-	}
-
-	// 分页
-	.man-content-pages {
-		text-align: right;
-		padding: 20px 0;
-
-	}
-
-	.el-table--border,
-	.el-table--group {
-		border: none;
-	}
-
-	.el-pagination button {
-		background-color: #DEE5E7;
-	}
-
-	.man-content-pages {
-		// padding-left: 30px;
+	.allH5Tlt {
 		display: flex;
-		// align-items: center;
-		justify-content: space-between;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 60px;
+		font-size: 20px;
+		font-weight: 700;
+		position: relative;
+	}
 
-		@media screen and (max-width:1000px) {
-			flex-direction: column;
-		}
+	.allH5TltBox {
+		position: absolute;
+		left: 25px;
 	}
 </style>

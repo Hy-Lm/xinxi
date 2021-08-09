@@ -10,41 +10,43 @@ import zhuci from '@/components/zhuci'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'index',
-      component: index
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: home
-    },
-    {
-      path: '/all',
-      name: 'all',
-      component: all
-    },
-    {
-      path: '/student',
-      name: 'student',
-      component: student
-    },
-    {
-      path: '/addXinxi',
-      name: 'addXinxi',
-      component: addXinxi
-    },
-    {
-      path: '/zhuci',
-      name: 'zhuci',
-      component: zhuci
-    },
-    {
-      path: '/updateXinxi',
-      name: 'updateXinxi',
-      component: updateXinxi
-    }
-  ]
+	routes: [{
+			path: '/',
+			name: 'index',
+			component: index
+		},
+		{
+			path: '/home',
+			name: 'home',
+			component: home
+		},
+		{
+			path: '/all',
+			name: 'all',
+			component: all
+		},
+		
+		{
+			path: '/student',
+			name: 'student',
+			component: student
+		},
+		{
+			path: '/addXinxi',
+			name: 'addXinxi',
+			component: addXinxi
+		},
+		
+		{
+			path: '/zhuci',
+			name: 'zhuci',
+			component: zhuci
+		},
+		{
+			path: '/updateXinxi',
+			name: 'updateXinxi',
+			component: updateXinxi
+		},
+		
+	]
 })
