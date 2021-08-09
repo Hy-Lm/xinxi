@@ -193,8 +193,6 @@
 			},
 			// 删除
 			delClick(index) {
-
-				console.log(index)
 				this.$axios.get(this.url + 'del.php', {
 					params: {
 						id: index
@@ -207,6 +205,7 @@
 							type: 'success'
 						});
 						// alert('删除成功')
+             this.tableData=this.tableData.filter(item=>item.id!=index)
 						this.info()
 					} else {
 						this.$message.error('删除失败');
